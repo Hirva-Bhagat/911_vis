@@ -3,37 +3,45 @@
 * * * * * * * * * * * * * */
 
 // init global variables, switches, helper functions
-let myPieChart,
-    myMapVis;
+let myCrimeClock,
+    myDayNightScatter;
 
 function updateAllVisualizations(){
-    myPieChart.wrangleData()
-    myMapVis.wrangleData()
+    myCrimeClock.wrangleData()
+    myDayNightScatter.wrangleData()
 }
 
-// load data using promises
-let promises = [
-    d3.json("data/airports.json"),
-    d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json")
-];
+// load data
+d3.csv("data/911_clean.csv",function(data){
+    console.log(data);
+},function(error, rows){
+    console.log(rows);
+});
 
-Promise.all(promises)
-    .then( function(data){ initMainPage(data) })
-    .catch( function (err){console.log(err)} );
+d3.csv('data/911_clean.csv')
+    .then(function(data) {
+        initMainPage(data)
+        console.log(data)
+    })
+    .catch(function(error){
+        // handle error
+        console.log(err)
+    })
+
 
 // initMainPage
 function initMainPage(allDataArray) {
 
     // log data
-    // console.log(allDataArray);
+    console.log(allDataArray);
 
     // activity 1, pie chart
-    myPieChart = new PieChart('pieDivRight')
+    myCrimeClock = new CrimeClock('div_name')
 
     // activity 2, force layout
-    myMapVis = new MapVis('mapDiv', allDataArray[0], allDataArray[1])
+    myDayNightScatter = new DayNightVis('div_name', allDataArray[0], allDataArray[1])
 
-    console.log("Sfasfsa");
+    console.log("Check here");
 
     console.log(allDataArray[0]);
     console.log(allDataArray[1]);
