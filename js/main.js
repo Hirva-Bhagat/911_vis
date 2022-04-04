@@ -10,7 +10,7 @@ let parseTime = d3.timeParse("%H:%M:%S");
 
 function updateAllVisualizations(){
     myCrimeClock.wrangleData()
-    myDayNightScatter.wrangleData()
+    //myDayNightScatter.wrangleData()
 }
 
 d3.csv('data/911_clean.csv').then(function(d) {
@@ -55,7 +55,7 @@ function initMainPage(allDataArray) {
     //myCrimeClock = new CrimeClock('div_name')
 
     // activity 2, force layout
-    //myDayNightScatter = new DayNightVis('div_name', allDataArray[0], allDataArray[1])
+    myDayNightScatter = new DayNightVis('DayNightVis', allDataArray)
 
 
 }
