@@ -43,7 +43,7 @@ class DayNightVis {
         vis.svg.append('g')
             .attr('class', 'title DNvis-title')
             .append('text')
-            .text('Day Night Visualisation')
+            .text('Day vs. Night Calls')
             .attr('transform', `translate(${vis.width / 2}, 20)`)
             .attr('text-anchor', 'middle');
 
