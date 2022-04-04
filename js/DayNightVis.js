@@ -47,18 +47,15 @@ class DayNightVis {
 
         vis.groupData=d3.nest()
             .key(function(d){
-            return d.Type_of_call;
+            return d.Day_or_night;
         }).rollup(function(leaves){
                 return d3.sum(leaves, function(d){
                     return leaves.length;
                 });
             }).entries(vis.data)
         console.log(vis.groupData)
-        
 
 
-        vis.pair=[]
-        vis.pair
 
 
         vis.xScale = d3.scalePoint()
@@ -68,7 +65,7 @@ class DayNightVis {
         console.log(vis.xDomain)
 
         vis.yScale = d3.scaleLinear()
-            .domain(0,2000000000)
+            .domain([0,6000000000])
             .range([ vis.height, 0]);
         console.log(vis.yScale)
 
@@ -151,12 +148,13 @@ console.log(vis.groupData)
             .data(vis.groupData)
             .enter().append("g")
             .attr("transform", function(d) {
-                return "translate(" + vis.xScale(d.values) + "," + vis.yScale(d.key.values) + ")";
+                console.log(vis.yScale(d.value))
+                return "translate(" + vis.xScale(d.key) + "," + vis.yScale(d.value) + ")";
             });
 
         vis.bubble.append("circle")
             .attr("r", function(d) {
-                return -Math.log(d.key.key.value);
+                return 20;
             })
             .style("fill", "#337ab7");
 
