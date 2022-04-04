@@ -18,7 +18,7 @@ class DayNightVis {
         let vis = this;
 
         // margin conventions
-        vis.margin = {top: 10, right: 50, bottom: 10, left: 50};
+        vis.margin = {top: 60, right: 50, bottom: 10, left: 100};
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
@@ -44,34 +44,37 @@ class DayNightVis {
             return p;
         }, []);
 
-        vis.groupCalls = [];
-        vis.maxCount = 0;
-        vis.count=function (dataset, chosenCategory) {
-            var count = 0;
-            for (var d in dataset) {
-                if (d.Type_of_call==chosenCategory) {
-                    count += 1;
-                } else {
-                    count += 0;
-                }
 
-            }
-            return count
-        }
+        vis.groupData=d3.nest()
+            .key(function(d){
+            return d.Type_of_call;
+        }).rollup(function(leaves){
+                return d3.sum(leaves, function(d){
+                    return leaves.length;
+                });
+            }).entries(vis.data)
+        console.log(vis.groupData)
+        
+
+
+        vis.pair=[]
+        vis.pair
+
 
         vis.xScale = d3.scalePoint()
-            .range([0, vis.width], 1)
+            .range([0, vis.width],1)
             .domain(vis.xDomain);
+
+        console.log(vis.xDomain)
 
         vis.yScale = d3.scaleLinear()
             .domain(0,2000000000)
-            .range([ height, 0]);;
+            .range([ vis.height, 0]);
+        console.log(vis.yScale)
 
-        vis.xAxis = d3.axisBottom(vis.xScale)
-            .tickSizeInner(-(vis.height + 6));
+        vis.xAxis = d3.axisTop(vis.xScale).tickSizeInner(-(vis.height + 6)).tickSizeOuter(0);
 
-        vis.yAxis = d3.axisLeft(vis.yScale)
-            .tickSizeInner(-(vis.width + 6));
+        vis.yAxis = d3.axisLeft(vis.yScale);
 
         vis.x = vis.svg.append("g")
             .call(vis.xAxis);
@@ -94,6 +97,7 @@ class DayNightVis {
             .attr("dx", "1em")
             .attr("dy", "0.5em")
             .attr("transform", "rotate(-75)");
+
 
         vis.y = vis.svg.append("g")
             .call(vis.yAxis);
@@ -118,7 +122,6 @@ class DayNightVis {
 
 
 
-
 vis.wrangleData()
 
 
@@ -131,15 +134,7 @@ vis.wrangleData()
     wrangleData() {
         let vis = this
 
-        vis.groupData=d3.nest().key(function(d){
-            return d.Type_of_call;
-        })
 
-            .rollup(function(leaves){
-                return d3.sum(leaves, function(d){
-                    return leaves.length;
-                });
-            }).entries(vis.data)
 
 console.log(vis.groupData)
         vis.updateVis()
@@ -150,15 +145,18 @@ console.log(vis.groupData)
     updateVis() {
         let vis = this;
 
+
         vis.bubble = vis.svg.append("g")
             .selectAll("g")
-            .data(vis.data)
+            .data(vis.groupData)
             .enter().append("g")
-
+            .attr("transform", function(d) {
+                return "translate(" + vis.xScale(d.values) + "," + vis.yScale(d.key.values) + ")";
+            });
 
         vis.bubble.append("circle")
             .attr("r", function(d) {
-                return 1;
+                return -Math.log(d.key.key.value);
             })
             .style("fill", "#337ab7");
 
