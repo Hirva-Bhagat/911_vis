@@ -8,7 +8,7 @@ class DayNightVis {
     // constructor method to initialize Timeline object
     constructor(parentElement,data) {
         this.parentElement = parentElement;
-        this.circleColors = ['#b2182b', '#d6604d', '#f4a582', '#fddbc7'];
+        this.circleColors = {"EMS":'#b2182b', "Fire":'#d6604d', "Traffic":'#f4a582'};
         this.data=data
         // call initVis method
         this.initVis()
@@ -21,6 +21,16 @@ class DayNightVis {
         vis.margin = {top: 60, right: 50, bottom: 10, left: 100};
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
+
+        vis.norm=function(enteredValue, minEntry, maxEntry, normalizedMin, normalizedMax) {
+
+            var mx = (enteredValue-minEntry)/(maxEntry-minEntry);
+            var preshiftNormalized = mx*(normalizedMax-normalizedMin);
+            var shiftedNormalized = preshiftNormalized + normalizedMin;
+
+            return shiftedNormalized;
+
+        }
 
         // init drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -48,7 +58,11 @@ class DayNightVis {
         vis.groupData=d3.nest()
             .key(function(d){
             return d.Day_or_night;
-        }).rollup(function(leaves){
+        })
+            .key(function(d){
+                return d.Type_of_call;
+            })
+            .rollup(function(leaves){
                 return d3.sum(leaves, function(d){
                     return leaves.length;
                 });
@@ -65,7 +79,7 @@ class DayNightVis {
         console.log(vis.xDomain)
 
         vis.yScale = d3.scaleLinear()
-            .domain([0,6000000000])
+            .domain([0,1300000000])
             .range([ vis.height, 0]);
         console.log(vis.yScale)
 
@@ -130,6 +144,20 @@ vis.wrangleData()
     // wrangleData method
     wrangleData() {
         let vis = this
+        vis.displayData=[]
+        vis.groupData.forEach(e=>{
+            e.values.forEach(g=>{
+                vis.displayData.push(
+                    {
+                        "DON":e.key,
+                        "TOC":g.key,
+                        "count":g.value,
+                        "colour":vis.circleColors[g.key]
+                    }
+                )
+            })
+
+        })
 
 
 
@@ -140,23 +168,27 @@ console.log(vis.groupData)
 
     // updateVis method
     updateVis() {
-        let vis = this;
 
+        let vis = this;
+        console.log(vis.displayData)
 
         vis.bubble = vis.svg.append("g")
             .selectAll("g")
-            .data(vis.groupData)
+            .data(vis.displayData)
             .enter().append("g")
             .attr("transform", function(d) {
-                console.log(vis.yScale(d.value))
-                return "translate(" + vis.xScale(d.key) + "," + vis.yScale(d.value) + ")";
+                    console.log(d.key)
+                    return "translate(" + vis.xScale(d.DON) + "," + vis.yScale(d.count) + ")";
+
+
             });
 
         vis.bubble.append("circle")
             .attr("r", function(d) {
-                return 20;
+                return vis.norm(d.count,500000,1300000000,5,30);
             })
-            .style("fill", "#337ab7");
+            .style("fill", function(d) {
+                return d.colour});
 
     }
 }
