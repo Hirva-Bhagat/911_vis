@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
     <meta charset="utf-8" />
 
@@ -34,7 +34,7 @@
             background: #eee;
             font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
             font-size: 14px;
-            color: black;
+            color: #000;
             margin: 0;
             padding: 0;
         }
@@ -80,25 +80,19 @@
 
         <!-- Create a div where the graph will take place -->
         <div class="swiper-slide">
-            The efficient management and provision of 911 calls
-            (an emergency telephone number in the United States)
-            have been consistently challenging. As a result, several
-            stakeholder groups have been trying to collect, use, and
-            analyze the relevant information in the last years to resolve
-            the issues such as inadequate resources, lag time for a proper
-            response, and other consequences link. Achieving a systemized
-            plan for a more effective management plan will benefit all
-            stakeholders providing service and the residents and visitors.
-            Such a proper plan certainly requires a comprehensive understanding
-            of the statistics showing the information, which motivates a
-            compelling information visualization, which our group has
-            been trying to provide.
-            <!--  <img src="figures/phone.jpg" width="4" height="59.6" alt=""> -->
+
             <div id="my_dataviz"></div>
         </div>
         <div class="swiper-slide">
-            <div style="height: 70%; width:70%; border: thin solid grey; border-radius: 5px; background: white(64,64,64,0.4)" id="DayNightVis"></div></div>
-        <div class="swiper-slide">Slide 4</div>
+            <div style="height: 80%; width:80%; border: thin solid grey; border-radius: 5px; background: rgba(64,64,64,0.4)" id="DayNightVis"></div>
+        </div>
+        <div class="swiper-slide">
+            <div style="height: 80%; width:50%; border: thin solid grey; border-radius: 5px; background: rgba(0,0,0,0)" id="barVisTop"></div>
+            <div style="height: 80%; width:50%; border: thin solid grey; border-radius: 5px; background: rgba(0,0,0,0)" id="barVisBottom"></div>
+        </div>
+        <div class="swiper-slide">
+            <div style="height: 80%; width:80%; border: thin solid grey; border-radius: 5px; background: rgba(0,0,0,0)" id="mapVis"></div>
+        </div>
         <div class="swiper-slide">Slide 5</div>
     </div>
     <div class="swiper-pagination"></div>
@@ -107,13 +101,13 @@
 <script>
 
     // List of words
-    var myWords = [{word: "Emergency", size: "10"}, {word: "Theif", size: "20"}, {word: "call", size: "50"}, {word: "", size: "30"}, {word: "Alarm", size: "20"}, {word: "", size: "80"},{word: "Call", size: "60"},
-        {word: "Traffic", size: "60"},{word: "Injury", size: "60"},{word: "Accident", size: "60"},{word: "Fire", size: "60"},{word: "hospital", size: "60"}]
+    var myWords = [{word: "Crime", size: "10"}, {word: "Theif", size: "20"}, {word: "Climbing", size: "50"}, {word: "Kiting", size: "30"}, {word: "Sailing", size: "20"}, {word: "Snowboarding", size: "60"},{word: "Snowboarding", size: "60"},
+        {word: "Snowboarding", size: "60"},{word: "Snowboarding", size: "60"},{word: "Snowboarding", size: "60"},{word: "Snowboarding", size: "60"},{word: "Snowboarding", size: "60"}]
 
     // set the dimensions and margins of the graph
     var margin = {top: 10, right: 10, bottom: 10, left: 10},
-        width = 500 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+        width = 450 - margin.left - margin.right,
+        height = 450 - margin.top - margin.bottom;
 
     // append the svg object to the body of the page
     var svg = d3.select("#my_dataviz").append("svg")
@@ -123,14 +117,13 @@
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
-
     // Constructs a new cloud layout instance. It run an algorithm to find the position of words that suits your requirements
     // Wordcloud features that are different from one word to the other must be here
     var layout = d3.layout.cloud()
         .size([width, height])
         .words(myWords.map(function(d) { return {text: d.word, size:d.size}; }))
         .padding(5)        //space between words
-        .rotate(function() { return ~~(Math.random() * 2) * 100; })
+        .rotate(function() { return ~~(Math.random() * 2) * 90; })
         .fontSize(function(d) { return d.size; })      // font size of words
         .on("end", draw);
     layout.start();
@@ -145,7 +138,7 @@
             .data(words)
             .enter().append("text")
             .style("font-size", function(d) { return d.size; })
-            .style("fill", "orange")
+            .style("fill", "#69b3a2")
             .attr("text-anchor", "middle")
             .style("font-family", "Impact")
             .attr("transform", function(d) {
@@ -173,5 +166,7 @@
 </script>
 <script src="js/main.js"></script>
 <script src="js/DayNightVis.js"></script>
+<script src="js/barChart.js"></script>
+<script src="js/mapVis.js"></script>
 </body>
 </html>

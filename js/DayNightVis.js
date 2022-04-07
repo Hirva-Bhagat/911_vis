@@ -43,7 +43,7 @@ class DayNightVis {
         vis.svg.append('g')
             .attr('class', 'title DNvis-title')
             .append('text')
-            .text('Day vs. Night Calls')
+            .text('Day Night Visualisation')
             .attr('transform', `translate(${vis.width / 2}, 20)`)
             .attr('text-anchor', 'middle');
 
@@ -134,11 +134,6 @@ class DayNightVis {
 
 
 vis.wrangleData()
-
-
-
-
-
     }
 
     // wrangleData method

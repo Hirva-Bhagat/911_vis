@@ -36,7 +36,6 @@ d3.csv('data/911_clean.csv').then(function(d) {
     });
 
         initMainPage(data)
-        console.log(data)
     })
     .catch(function(error){
         // handle error
@@ -57,5 +56,8 @@ function initMainPage(allDataArray) {
     // activity 2, force layout
     myDayNightScatter = new DayNightVis('DayNightVis', allDataArray)
 
+    myBarChartTop = new barChart('barVisTop', allDataArray, true);
+    myBarChartBottom = new barChart('barVisBottom', allDataArray, false);
 
+    myMap = new MapVis('mapVis', allDataArray);
 }
