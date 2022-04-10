@@ -170,7 +170,7 @@ class crimeClockVis {
                 })
                 .attr('transform',function(d){
                     return 'rotate('+ d.scale(d.value) +')';
-                }).on("mouseover", drag())
+                });
         }
 
         function moveHands(){
