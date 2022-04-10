@@ -98,11 +98,31 @@
         </div>
 
 
-        
+
         <div class="swiper-slide">
 
-            <div id="my_dataviz"></div>
+            <div id="hookImage">
+                <img data-src="../squirrels/images/hook-img.png" style="width: 350px;">
+            </div>
+
+            <div class="col-md-6 leftAlignItems" id="userGuess">
+                <h1 id="squirNumQuestion">How many 911 calls are received in Philadelphia?</h1>
+                <br>
+                <form id="squirrelForm" action="#firstPage" onsubmit="return false">
+                    <input placeholder=" Guess Here!"type="number" id="userSquirNum" value=" ">
+                    <input type="submit" class="squirButton" value="Submit">
+                </form>
+            </div>
+            <div class="col-md-6 leftAlignItems" id="hook-comparingGuess">
+                <h1 id="comparingSquirNum"></h1>
+            </div>
+            <div id="hookSquirrelDiv" >
+                <img data-src="/figures/phone.jpg" alt="squirrels" width="150px">
+            </div>
         </div>
+
+
+
 
         <div class="swiper-slide">
             <div style="height: 80%; width:80%; border: thin solid grey; border-radius: 5px; background: rgba(64,64,64,0.4)" id="DayNightVis"></div>
@@ -138,6 +158,9 @@
         <div class="swiper-slide" style="background-image:url('./data/clock.jpeg'); background-repeat: no-repeat;
   background-size: cover;">
             <div style="height: 50%; width:50%; margin-bottom: 200px;"  id="crimeClock"></div>
+        </div>
+        <div class="swiper-slide">
+           About us
         </div>
     </div>
     <div class="swiper-pagination"></div>
