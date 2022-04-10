@@ -28,42 +28,50 @@ my_dataviz {
 
 .clock{
     stroke: #000;
+    stroke-width: 1px;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
 #rim {
     fill: none;
-    stroke: #999;
-    stroke-width: 3px;
+    stroke: rgba(146, 236, 255, 0.47);
+    stroke-width: 1px;
 }
 
 .second-hand{
-    stroke-width:3;
+    stroke-width:1;
 
 }
 
 .minute-hand{
-    stroke-width:8;
+    stroke-width:6;
     stroke-linecap:round;
+    fill: rgba(10, 117, 140, 0.47);
+    opacity: 80%;
 }
 
 .hour-hand{
-    stroke-width:12;
+    stroke-width:10;
     stroke-linecap:round;
 }
 
 .hands-cover{
     stroke-width:3;
-    fill:#fff;
+    fill: rgba(10, 117, 140, 0.47);
 }
 
 .second-tick{
-    stroke-width:3;
-    fill:#000;
+
+    stroke-width:1;
+    fill: rgba(10, 117, 140, 0.47);
+    opacity: 80%;
 }
 
 .hour-tick{
-    stroke-width:8; //same as the miute hand
+
+    stroke-width:6; //same as the miute hand
+fill: rgba(10, 117, 140, 0.47);
+    opacity: 80%;
 }
 
 .second-label{

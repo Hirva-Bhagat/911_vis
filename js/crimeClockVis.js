@@ -19,8 +19,8 @@ class crimeClockVis {
         let vis = this;
 
         var radians = 0.0174532925,
-            clockRadius = 200,
-            margin = 50,
+            clockRadius = 220,
+            margin = 70,
             width = (clockRadius+margin)*2,
             height = (clockRadius+margin)*2,
             hourHandLength = 2*clockRadius/3,
@@ -48,6 +48,9 @@ class crimeClockVis {
         var secondScale =d3.scaleLinear()
             .range([0,354])
             .domain([0,59]);
+
+        var drag = d3.drag()
+            .on('drag', drag);
 
         var handData = [
             {
@@ -167,7 +170,7 @@ class crimeClockVis {
                 })
                 .attr('transform',function(d){
                     return 'rotate('+ d.scale(d.value) +')';
-                });
+                }).on("mouseover", drag())
         }
 
         function moveHands(){
@@ -193,7 +196,28 @@ class crimeClockVis {
             moveHands();
         }, 1000);
 
+        function drag() {
+
+            var rad = Math.atan2(d3.event.pageY, d3.event.pageX);
+            console.log(rad)
+
+            d3.select(this)
+                .attr({
+                    x2: function(d) {
+                        return clockRadius * Math.cos(rad);
+                    },
+                    y2: function(d) {
+                        return clockRadius * Math.sin(rad);
+                    }
+                });
+        }
+        function dragstart() {
+        }
+        function dragend() {
+        }
+
         d3.select(self.frameElement).style("height", height + "px");
+
 
     }
 
