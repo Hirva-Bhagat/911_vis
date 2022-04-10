@@ -58,6 +58,6 @@ function initMainPage(allDataArray) {
 
     myBarChartTop = new barChart('barVisTop', allDataArray, true);
     myBarChartBottom = new barChart('barVisBottom', allDataArray, false);
-
+    myCrimeClock=new crimeClockVis('crimeClock',allDataArray)
     myMap = new MapVis('mapVis', allDataArray);
 }

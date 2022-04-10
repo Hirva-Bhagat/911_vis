@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8" />
 
@@ -21,6 +21,9 @@
             rel="stylesheet"
             href="https://unpkg.com/swiper/swiper-bundle.min.css"
     />
+    <link
+            rel="stylesheet"
+    href="css/styles.css"/>
 
     <!-- Demo styles -->
     <style>
@@ -71,6 +74,7 @@
             object-fit: cover;
         }
     </style>
+    <link rel="stylesheet" href="../911_vis-main 4/css/styles.css">
 </head>
 
 <body>
@@ -86,14 +90,35 @@
         <div class="swiper-slide">
             <div style="height: 80%; width:80%; border: thin solid grey; border-radius: 5px; background: rgba(64,64,64,0.4)" id="DayNightVis"></div>
         </div>
-        <div class="swiper-slide">
-            <div style="height: 80%; width:50%; border: thin solid grey; border-radius: 5px; background: rgba(0,0,0,0)" id="barVisTop"></div>
-            <div style="height: 80%; width:50%; border: thin solid grey; border-radius: 5px; background: rgba(0,0,0,0)" id="barVisBottom"></div>
+        <div style = "background-image: url('crime2.jpeg')" class="swiper-slide">
+
+            <h1 class="align-self-center" style="color: white; height: 80%;  width: 30%; padding-left: 10vh; padding-bottom: 1vh; padding-right: 10vh; padding-top: 0vh">
+                Type of Crime in Pennsylvania
+                <p class="align-self-center" style="color: white; font-size:18px; height: 80%;  width: 100%; padding-left: 10vh; padding-bottom: 1vh; padding-right: 10vh; padding-top: 0vh">
+                    The text goes hereThe text goes hereThe text goes hereThe text goes hereThe text goes hereThe text goes here
+                    The text goes hereThe text goes hereThe text goes hereThe text goes hereThe text goes here
+                </p>
+            </h1>
+
+            <div class="row justify-content-center"
+                 style="height: 80%;  width: 50%; padding-left: 10vh; padding-bottom: 1vh; padding-right: 10vh; padding-top: 0vh">
+                <div id="barVisTop" class="align-self-center"
+                     style="height: 49%; width:100%; border: thin solid grey; border-radius: 5px; background: rgba(1,1,1,0.5)">
+
+                </div>
+
+                <div id="barVisBottom" class="align-self-center"
+                     style="height: 49%; width:100%; border: thin solid grey; border-radius: 5px; background: rgba(1,1,1,0.5)">
+                </div>
+            </div>
+
         </div>
         <div class="swiper-slide">
-            <div style="height: 80%; width:80%; border: thin solid grey; border-radius: 5px; background: rgba(0,0,0,0)" id="mapVis"></div>
+            <div style="height: 50%; width:40%; border: thin solid grey; border-radius: 5px; background: rgba(0,0,0,0)" id="mapVis"></div>
         </div>
-        <div class="swiper-slide">Slide 5</div>
+        <div class="swiper-slide" >
+            <div style="height: 80%; width:80%; border: thin solid grey; border-radius: 5px; background: rgba(0,0,0,0)"  id="crimeClock"></div>
+        </div>
     </div>
     <div class="swiper-pagination"></div>
 </div>
@@ -150,6 +175,18 @@
 
 <!-- Swiper JS -->
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+<!-- d3 -->
+<script src="https://d3js.org/d3.v6.min.js"></script>
+
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="https://d3js.org/topojson.v2.min.js"></script>
+<script src="https://d3js.org/d3-geo.v1.min.js"></script>
+<!--	<script src="https://d3js.org/d3-legend.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
 
 <!-- Initialize Swiper -->
 <script>
@@ -168,5 +205,6 @@
 <script src="js/DayNightVis.js"></script>
 <script src="js/barChart.js"></script>
 <script src="js/mapVis.js"></script>
+<script src="js/crimeClockVis.js"></script>
 </body>
 </html>
