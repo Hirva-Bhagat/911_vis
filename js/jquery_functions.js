@@ -17,8 +17,8 @@ $(document).ready(function(){
     // After the user submits, hide the guessing and cue the information!
     $('#numForm').submit(function(){
         var userInput = $('#userNum').val();
-        var totalSquirrels = 2373
-        var userOff = Math.abs(userInput - totalSquirrels).toLocaleString();
+        var totalcalls = 2373
+        var userOff = Math.abs(userInput - totalcalls).toLocaleString();
 
         $('#userGuess').fadeOut(800);
         $('#hook-comparingGuess').delay(1000).fadeIn(1600);
