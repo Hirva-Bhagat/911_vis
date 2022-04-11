@@ -25,6 +25,9 @@
             rel="stylesheet"
     href="css/styles.css"/>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/jquery_functions.js"></script>
+
     <!-- Demo styles -->
     <style>
         html,
@@ -97,16 +100,16 @@
 
         </div>
 
-
+<!-- Here I am adding the query -->
 
         <div class="swiper-slide">
 
             <div id="hookImage">
-                <img data-src="../squirrels/images/hook-img.png" style="width: 350px;">
+                <img data-src="figures/phone.jpg" style="width: 350px;">
             </div>
 
             <div class="col-md-6 leftAlignItems" id="userGuess">
-                <h1 id="squirNumQuestion">How many 911 calls are received in Philadelphia?</h1>
+                <h1 style="font-size: xxx-large;color: chocolate " id="squirNumQuestion">How many 911 calls are received in Philadelphia?</h1>
                 <br>
                 <form id="squirrelForm" action="#firstPage" onsubmit="return false">
                     <input placeholder=" Guess Here!"type="number" id="userSquirNum" value=" ">
@@ -117,7 +120,7 @@
                 <h1 id="comparingSquirNum"></h1>
             </div>
             <div id="hookSquirrelDiv" >
-                <img data-src="/figures/phone.jpg" alt="squirrels" width="150px">
+                <img data-src="/figures/phone.jpg" alt="phones" width="150px">
             </div>
         </div>
 
@@ -249,5 +252,9 @@
 <script src="js/barChart.js"></script>
 <script src="js/mapVis.js"></script>
 <script src="js/crimeClockVis.js"></script>
+
+
+
+
 </body>
 </html>
