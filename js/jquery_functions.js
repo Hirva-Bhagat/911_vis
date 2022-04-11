@@ -25,8 +25,5 @@ $(document).ready(function(){
         $('#comparingcallNum').html("You were off by " + userOff + " calls. There are actually <strong> 2,373 unique calls </strong> in Philadelphia!");
 
     });
-
-
-
 });
 
