@@ -25,10 +25,10 @@ class barChart {
             .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`);
 
         if (vis.order) {
-            vis.barTitle = "Top 10 Crime";
+            vis.barTitle = "Top 10 Issues";
         }
         else {
-            vis.barTitle = "Bottom 10 Crime";
+            vis.barTitle = "Bottom 10 Issues";
         }
 
         // title
