@@ -1,3 +1,5 @@
+var topTen_Global;
+
 class barChart {
 
     // constructor method to initialize Timeline object
@@ -76,6 +78,7 @@ class barChart {
         vis.bar = vis.svg.append("rect")
             .attr("class", "bar")
 
+
         vis.wrangleData();
     }
     wrangleData() {
@@ -101,6 +104,8 @@ class barChart {
 
 
         vis.topTenData = vis.groupData.slice(0, 10)
+
+        topTen_Global = vis.topTenData;
 
         vis.updateVis();
     }
@@ -141,5 +146,40 @@ class barChart {
             .attr("x", function (d) { return 0;} )
             .attr("width", function(d) {return (vis.x(d.value)); })
             .attr("height", vis.y.bandwidth())
+
+
     }
+
+    updateVisualization() {
+        let vis = this;
+
+        if (this.order) {
+            vis.topTenData.sort((a, b) => { return a.value - b.value})
+            this.order = false;
+        }
+        else {
+            vis.topTenData.sort((a, b) => { return b.value - a.value})
+            this.order = true;
+        }
+
+        vis.y.domain(vis.topTenData.map(d=>d.key))
+
+
+        vis.yAxis = d3.axisLeft()
+            .scale(vis.y);
+
+        vis.svg.select(".bar-y-axis")
+            .transition()
+            .duration(1000)
+            .call(vis.yAxis);
+
+        vis.svg.selectAll("rect")
+            .style("opacity", 0.5)
+            .transition()
+            .duration(1000)
+            .attr("y", function(d) { return vis.y(d.key); })
+            .attr("width", function(d) {return (vis.x(d.value)); })
+            .style("opacity", 1)
+    }
+
 }

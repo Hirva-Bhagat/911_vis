@@ -60,4 +60,19 @@ function initMainPage(allDataArray) {
     myBarChartBottom = new barChart('barVisBottom', allDataArray, false);
     myCrimeClock=new crimeClockVis('crimeClock',allDataArray)
     myMap = new MapVis('mapVis', allDataArray);
+
+
+    bar_button_top = d3.select("#change-top");
+    bar_button_bottom = d3.select("#change-bottom");
+
+    bar_button_top
+        .on("click", function() {
+            myBarChartTop.updateVisualization();
+        })
+
+    bar_button_bottom
+        .on("click", function() {
+            myBarChartBottom.updateVisualization();
+        })
+
 }
