@@ -2,7 +2,7 @@
     position: absolute;
     text-align: center;
     font: 12px sans-serif;
-    /*  pointer-events: none;	This line needs to be removed */
+    pointer-events: none;
 }
 .tooltip h3,h4 {
     text-align: left;
