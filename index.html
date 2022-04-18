@@ -25,7 +25,10 @@
             rel="stylesheet"
     href="css/styles.css"/>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
     <script src="js/jquery_functions.js"></script>
 
     <!-- Demo styles -->
@@ -101,14 +104,23 @@
 <!-- Here I am adding the query -->
 
         <div class="swiper-slide">
+            <h1 class="align-self-center" style="height: 50%; width:50%; padding-bottom: 40vh; background: rgba(1,1,1,0.5)">
+                <img src="figures/whentocall911_2.png">
+                <img src="figures/whentocall911_6.png">
+            </h1>
 
             <div class="row section" id="hookVis">
                 <div class="col-md-6 leftAlignItems" id="userGuess">
-                    <h1 id="callNumQuestion">How many 911 calls in Pennsylvania?</h1>
+                    <div  class="align-self-center"
+                          style="height: 50%; width:50%; padding-left: 15vh; background: white">
+                        <img src="figures/emergency-phone-call-cartoon-kl7pvrj.jpeg">
+                    </div>
+
+                    <h1 id="callNumQuestion">Average daily 911 calls in Pennsylvania?</h1>
                     <br>
-                    <form id="numForm" action="#firstPage" onsubmit="return false">
-                        <input placeholder=" Guess Here!"type="number" id="userNum" value=" ">
-                        <input type="submit" class="callButton" value="Submit">
+                    <form id="numForm">
+                        <input placeholder=" Guess Here!" type="number" id="userNum" value="">
+                        <input type="submit" class="callButton" id="numFormSubmit" value="Submit">
                     </form>
                 </div>
                 <div class="col-md-6 leftAlignItems" id="hook-comparingGuess">
@@ -119,41 +131,51 @@
 
 
         <div class="swiper-slide">
-            <h1 class="align-self-center" style="color: grey; height: 80%;  width: 30%; padding-left: 10vh; padding-bottom: 4vh; padding-right: 10vh; padding-top: 1vh">
-                911 Operation system
-                <p class="align-self-center" style="color: grey; font-size:18px; height: 100%;  width: 70%; padding-left: 10vh; padding-bottom: 4vh; padding-right: 10vh; padding-top: 1vh">
-                    The efficient management and provision of 911 calls (an emergency telephone number in the United States)
-                    have been consistently challenging. As a result, several stakeholder groups have been trying to collect,
-                    use, and analyze the relevant information in the last years to resolve the issues such as inadequate
-                    resources, lag time for a proper response, and other consequences link. Achieving a systemized plan
-                    for a more effective management plan will benefit all stakeholders
-                    providing service and the residents and visitors. Such a proper plan certainly requires a
-                    comprehensive understanding of the statistics showing the information, which motivates a
-                    compelling information visualization, which our group has been trying to provide.
-                </p>
-            </h1>
 
             <div class="row justify-content-center"
-                 style="height: 80%;  width: 50%; padding-left: 10vh; padding-bottom: 1vh; padding-right: 10vh; padding-top: 0vh">
+                 style="height: 50%;  width: 150%; padding-left: 10vh; padding-bottom: 40vh; padding-right: 5vh; padding-top: 0vh">
                 <div  class="align-self-center"
-                     style="height: 80%; width:100%;  background: rgba(1,1,1,0.5)">
+                      style="height: 80%; width:100%;  background: rgba(1,1,1,0.5)">
                     <img src="figures/lego.png">
                 </div>
+                <h1 class="align-self-center" style="color: orange; height: 80%;  width: 91%; padding-left: 5vh; padding-bottom: 4vh; padding-right: 5vh; padding-top: 1vh; background-color: grey">
+                    911 Operation system
+                    <p class="align-self-center" style="color: yellow; font-size:18px; height: 100%;  width: 96%; padding-left: 5vh; padding-bottom: 4vh; padding-right: 5vh; padding-top: 1vh">
+                        The efficient management and provision of 911 calls (an emergency telephone number in the United States)
+                        have been consistently challenging. As a result, several stakeholder groups have been trying to collect,
+                        use, and analyze the relevant information in the last years to resolve the issues such as inadequate
+                        resources, lag time for a proper response, and other consequences link. Achieving a systemized plan
+                        for a more effective management plan will benefit all stakeholders
+                        providing service and the residents and visitors. Such a proper plan certainly requires a
+                        comprehensive understanding of the statistics showing the information, which motivates a
+                        compelling information visualization, which our group has been trying to provide.
+                    </p>
+                </h1>
 
-               <!-- <div  class="align-self-center"
-                     style="height: 49%; width:100%; background: rgba(1,1,1,0.5)">
-                     <img src="figures/4.png">
-                </div>-->
+
+
+                <!-- <div  class="align-self-center"
+                      style="height: 49%; width:100%; background: rgba(1,1,1,0.5)">
+                      <img src="figures/4.png">
+                 </div>-->
             </div>
         </div>
 
 
 
+        <div style = "background-image: url('figures/emergency.jpeg')" class="swiper-slide">
+            <h1 class="align-self-center" style="color: white; height: 80%;  width: 30%; padding-left: 10vh; padding-bottom: 1vh; padding-right: 10vh; padding-top: 0vh">
+                Type of Crime in Pennsylvania
+                <p class="align-self-center" style="color: white; font-size:19px; height: 80%;  width: 90%; padding-left: 10vh; padding-bottom: 0vh; padding-right: 10vh; padding-top: 10vh">
 
-
-        <div class="swiper-slide">
-            <div style="height: 80%; width:80%; border: thin solid grey; border-radius: 5px; background: rgba(64,64,64,0.4)" id="DayNightVis"></div>
+                </p>
+            </h1>
+            <div    class="row justify-content-center"
+                    style="height: 50%; width:50%; padding-right: 10vh; border: thin solid grey; border-radius: 5px; background: rgba(1,1,1,0.5); position: relative" id="DayNightVis">
+                <div id="day-night-test" style="position: absolute; left: 0; top: 50%; width: 100%; text-align: center"></div>
+            </div>
         </div>
+
         <div style = "background-image: url('crime2.jpeg')" class="swiper-slide">
 
             <h1 class="align-self-center" style="color: white; height: 80%;  width: 30%; padding-left: 10vh; padding-bottom: 1vh; padding-right: 10vh; padding-top: 0vh">
@@ -254,7 +276,8 @@
 
 <!-- Swiper JS -->
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+-->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 

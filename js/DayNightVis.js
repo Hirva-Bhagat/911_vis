@@ -43,8 +43,8 @@ class DayNightVis {
         vis.svg.append('g')
             .attr('class', 'title DNvis-title')
             .append('text')
-            .text('Day Night Visualisation')
-            .attr('transform', `translate(${vis.width / 2}, 20)`)
+            .text('types and counts of 911 calls')
+            .attr('transform', `translate(${vis.width / 2}, -15)`)
             .attr('text-anchor', 'middle');
 
 
@@ -57,8 +57,8 @@ class DayNightVis {
 
         vis.groupData=d3.nest()
             .key(function(d){
-            return d.Day_or_night;
-        })
+                return d.Day_or_night;
+            })
             .key(function(d){
                 return d.Type_of_call;
             })
@@ -133,7 +133,7 @@ class DayNightVis {
 
 
 
-vis.wrangleData()
+        vis.wrangleData()
     }
 
     // wrangleData method
@@ -156,7 +156,7 @@ vis.wrangleData()
 
 
 
-console.log(vis.groupData)
+        console.log(vis.groupData)
         vis.updateVis()
 
     }
@@ -172,18 +172,20 @@ console.log(vis.groupData)
             .data(vis.displayData)
             .enter().append("g")
             .attr("transform", function(d) {
-                    console.log(d.key)
-                    return "translate(" + vis.xScale(d.DON) + "," + vis.yScale(d.count) + ")";
-
+                return "translate(" + vis.xScale(d.DON) + "," + vis.yScale(d.count) + ")";
 
             });
 
         vis.bubble.append("circle")
             .attr("r", function(d) {
-                return vis.norm(d.count,500000,1300000000,5,30);
+                return vis.norm(d.count,500000,1300000000,4,20);
             })
             .style("fill", function(d) {
-                return d.colour});
+                return d.colour})
+            .on("click", function(e, d) {
+                // d3.select(this)
+                $("#day-night-test").text("Count: " + d.count + " Type: " + d.TOC);
+            });
 
     }
 }
