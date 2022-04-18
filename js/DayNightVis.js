@@ -92,13 +92,13 @@ class DayNightVis {
 
         vis.x.selectAll("path")
             .style("fill", "none")
-            .style("stroke", "#000")
+            .style("stroke", "white")
             .style("shape-rendering", "crispEdges");
 
         vis.x.selectAll("line")
             .attr("transform", "translate(0,-6)")
             .style("fill", "none")
-            .style("stroke", "#000")
+            .style("stroke", "white")
             .style("shape-rendering", "crispEdges")
             .style("opacity", 0.2);
 
@@ -115,13 +115,13 @@ class DayNightVis {
 
         vis.y.selectAll("path")
             .style("fill", "none")
-            .style("stroke", "#000")
+            .style("stroke", "white")
             .style("shape-rendering", "crispEdges");
 
         vis.y.selectAll("line")
             .attr("transform", "translate(-6,0)")
             .style("fill", "none")
-            .style("stroke", "#000")
+            .style("stroke", "white")
             .style("shape-rendering", "crispEdges")
             .style("opacity", 0.2);
 

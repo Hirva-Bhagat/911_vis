@@ -8,7 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/DayNightVis.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/DayNightVis.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/jquery_functions.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/jquery_functions.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +101,7 @@
       <workItem from="1649966372203" duration="2966000" />
       <workItem from="1649969748388" duration="198000" />
       <workItem from="1650194236585" duration="12191000" />
-      <workItem from="1650246098826" duration="1514000" />
+      <workItem from="1650246098826" duration="2193000" />
     </task>
     <servers />
   </component>
