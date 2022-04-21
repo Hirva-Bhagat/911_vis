@@ -11,6 +11,10 @@
     <!-- Load d3-cloud -->
     <script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3.layout.cloud.js"></script>
 
+    <script src="js/DayNightVis.js"></script>
+    <script src="js/dataDN.js"></script>
+    <script src="js/DNManipulation.js"></script>
+
     <title>Swiper demo</title>
     <meta
             name="viewport"
@@ -164,15 +168,27 @@
 
 
         <div style = "background-color: cadetblue" class="swiper-slide">
-            <h1 class="align-self-center" style="color: orange; height: 80%;  width: 30%; padding-left: 10vh; padding-bottom: 1vh; padding-right: 10vh; padding-top: 0vh">
-                Type of call in Pennsylvania
-                <p class="align-self-center" style="color: blue; font-size:19px; height: 80%;  width: 90%; padding-left: 10vh; padding-bottom: 0vh; padding-right: 10vh; padding-top: 10vh">
+            <h1 class="align-self-center" style="color: white; height: 80%;  width: 30%; padding-left: 10vh; padding-bottom: 1vh; padding-right: 10vh; padding-top: 0vh">
+                Average diurnal number of different types of 911 calls
+                <p class="align-self-center" style="color: white; font-size:19px; height: 80%;  width: 90%; padding-left: 10vh; padding-bottom: 0vh; padding-right: 10vh; padding-top: 10vh">
 
                 </p>
             </h1>
             <div    class="row justify-content-center"
-                    style="height: 50%; width:50%; padding-right: 10vh; border: thin solid grey; border-radius: 5px; background: rgba(1,1,1,0.5); position: relative" id="DayNightVis">
-                <div id="day-night-test" style="position: absolute; left: 0; top: 50%; width: 100%; text-align: center"></div>
+                    style="height: 60%; width:40%; padding-right: 10vh; padding-left: 2vh; border: thin solid grey; border-radius: 5px; background: rgba(1,1,1,0.5); position: relative" id="DayNightVis">
+                <!-- drop down menu -->
+                <div class="row justify-content-center">
+                    <div class="align-self-center">
+                        <div class="user-control">
+                            <div class="form-group">
+                                <select id="All Categories" onchange="dataManipulation()" class="form-control">
+                                    <option value="Day">Day</option>
+                                    <option value="Night">Night</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -297,6 +313,8 @@
 <!--	<script src="https://d3js.org/d3-legend.js"></script>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
 
+
+
 <!-- Initialize Swiper -->
 <script>
     var swiper = new Swiper(".mySwiper", {
@@ -311,7 +329,7 @@
     });
 </script>
 <script src="js/main.js"></script>
-<script src="js/DayNightVis.js"></script>
+<script src="js/jquery_functions.js"></script>
 <script src="js/barChart.js"></script>
 <script src="js/stackArea.js"></script>
 <script src="js/timeLine.js"></script>

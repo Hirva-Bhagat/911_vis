@@ -1,191 +1,89 @@
 /* * * * * * * * * * * * * *
-*         PieChart         *
+*         BarChart         *
 * * * * * * * * * * * * * */
 
+// CHART AREA
 
-class DayNightVis {
+//let margin = {top: 50, right: 20, bottom: 20, left: 90},
+ //   width = 500,
+ //   height = 180;
 
-    // constructor method to initialize Timeline object
-    constructor(parentElement,data) {
-        this.parentElement = parentElement;
-        this.circleColors = {"EMS":'#b2182b', "Fire":'#d6604d', "Traffic":'#f4a582'};
-        this.data=data
-        // call initVis method
-        this.initVis()
+//width = width > 600 ? 600 : width;
+
+
+
+// AXIS
+
+function renderBarChart(data) {
+
+    // Check array length (top 5 attractions)
+    if (data.length > 3) {
+        errorMessage("Max 3 rows");
+        return;
     }
 
-    initVis() {
-        let vis = this;
 
-        // margin conventions
-        vis.margin = {top: 60, right: 50, bottom: 10, left: 100};
-        vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
-        vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
+    dayx.domain(data.map(d => d.Category));
+    //y.domain(data.map(d => d.Count));
+    dayy.domain([0, d3.max(data, d => d.Count)]);
 
-        vis.norm=function(enteredValue, minEntry, maxEntry, normalizedMin, normalizedMax) {
-
-            var mx = (enteredValue-minEntry)/(maxEntry-minEntry);
-            var preshiftNormalized = mx*(normalizedMax-normalizedMin);
-            var shiftedNormalized = preshiftNormalized + normalizedMin;
-
-            return shiftedNormalized;
-
-        }
-
-        // init drawing area
-        vis.svg = d3.select("#" + vis.parentElement).append("svg")
-            .attr("width", vis.width + vis.margin.left + vis.margin.right)
-            .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
-            .append("g")
-            .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
-
-        // add title
-        vis.svg.append('g')
-            .attr('class', 'title DNvis-title')
-            .append('text')
-            .text('types and counts of 911 calls')
-            .attr('transform', `translate(${vis.width / 2}, -15)`)
-            .attr('text-anchor', 'middle');
+    // ---- DRAW BARS ----
+    let bars = daysvg.selectAll(".bar")
+        .remove()
+        .exit()
+        .data(data)
 
 
+    bars.enter()
+        .append("rect")
+        .attr("class", "bar")
+        .attr("fill", "navy")
+        //.transition(t)
+        .attr("x", d => dayx(d.Category))
+        .attr("y", d => dayy(d.Count))
+        .attr("height", d => (dayheight - dayy(d.Count)))
+        .attr("width", dayx.bandwidth())
 
-        vis.xDomain = vis.data.reduce(function(p, c) {
-            if (p.indexOf(c.Day_or_night) < 0) p.push(c.Day_or_night);
-            return p;
-        }, []);
 
-
-        vis.groupData=d3.nest()
-            .key(function(d){
-                return d.Day_or_night;
-            })
-            .key(function(d){
-                return d.Type_of_call;
-            })
-            .rollup(function(leaves){
-                return d3.sum(leaves, function(d){
-                    return leaves.length;
-                });
-            }).entries(vis.data)
-        console.log(vis.groupData)
+    // ---- DRAW AXIS	----
+    dayxAxisGroup = daysvg.select(".x-axis")
+        //.attr('transform', 'translate(0,' + (height - margin.bottom - margin.top) + ')')
+        .attr("class", "x-axis axis")
+        .attr("transform", "translate(0," + dayheight + ")")
+        .call(d3.axisBottom(dayx));
 
 
 
 
-        vis.xScale = d3.scalePoint()
-            .range([0, vis.width],1)
-            .domain(vis.xDomain);
-
-        console.log(vis.xDomain)
-
-        vis.yScale = d3.scaleLinear()
-            .domain([0,1300000000])
-            .range([ vis.height, 0]);
-        console.log(vis.yScale)
-
-        vis.xAxis = d3.axisTop(vis.xScale).tickSizeInner(-(vis.height + 6)).tickSizeOuter(0);
-
-        vis.yAxis = d3.axisLeft(vis.yScale);
-
-        vis.x = vis.svg.append("g")
-            .call(vis.xAxis);
-
-        vis.x.selectAll("path")
-            .style("fill", "none")
-            .style("stroke", "white")
-            .style("shape-rendering", "crispEdges");
-
-        vis.x.selectAll("line")
-            .attr("transform", "translate(0,-6)")
-            .style("fill", "none")
-            .style("stroke", "white")
-            .style("shape-rendering", "crispEdges")
-            .style("opacity", 0.2);
-
-        vis.x.selectAll("text")
-            .style("font", "10px sans-serif")
-            .style("text-anchor", "start")
-            .attr("dx", "1em")
-            .attr("dy", "0.5em")
-            .attr("transform", "rotate(-75)");
+    dayyAxisGroup = daysvg.select(".y-axis")
+        .call(dayyAxis);
 
 
-        vis.y = vis.svg.append("g")
-            .call(vis.yAxis);
-
-        vis.y.selectAll("path")
-            .style("fill", "none")
-            .style("stroke", "white")
-            .style("shape-rendering", "crispEdges");
-
-        vis.y.selectAll("line")
-            .attr("transform", "translate(-6,0)")
-            .style("fill", "none")
-            .style("stroke", "white")
-            .style("shape-rendering", "crispEdges")
-            .style("opacity", 0.2);
-
-        vis.y.selectAll("text")
-            .style("font", "10px sans-serif")
-            .style("text-anchor", "end")
-            .attr("dx", "-1em")
-            .attr("dy", "0.5em");
+    //svg.select("text.axis-title").remove();
+    daysvg.append("text")
+        .attr("class", "axis-title")
+        .attr("x", -5)
+        .attr("y", -15)
+        .attr("dy", ".1em")
+        .style("text-anchor", "end")
+        .text("Number of Calls");
 
 
-
-        vis.wrangleData()
-    }
-
-    // wrangleData method
-    wrangleData() {
-        let vis = this
-        vis.displayData=[]
-        vis.groupData.forEach(e=>{
-            e.values.forEach(g=>{
-                vis.displayData.push(
-                    {
-                        "DON":e.key,
-                        "TOC":g.key,
-                        "count":g.value,
-                        "colour":vis.circleColors[g.key]
-                    }
-                )
-            })
-
-        })
-
-
-
-        console.log(vis.groupData)
-        vis.updateVis()
-
-    }
-
-    // updateVis method
-    updateVis() {
-
-        let vis = this;
-        console.log(vis.displayData)
-
-        vis.bubble = vis.svg.append("g")
-            .selectAll("g")
-            .data(vis.displayData)
-            .enter().append("g")
-            .attr("transform", function(d) {
-                return "translate(" + vis.xScale(d.DON) + "," + vis.yScale(d.count) + ")";
-
-            });
-
-        vis.bubble.append("circle")
-            .attr("r", function(d) {
-                return vis.norm(d.count,500000,1300000000,4,20);
-            })
-            .style("fill", function(d) {
-                return d.colour})
-            .on("click", function(e, d) {
-                // d3.select(this)
-                $("#day-night-test").text("Count: " + d.count + " Type: " + d.TOC);
-            });
-
-    }
 }
+
+
+function errorMessage(message) {
+    console.log(message);
+}
+
+function shortenString(content, maxLength){
+    // Trim the string to the maximum length
+    let trimmedString = content.substr(0, maxLength);
+
+    // Re-trim if we are in the middle of a word
+    trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
+
+    return trimmedString;
+}
+
+;
