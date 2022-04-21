@@ -207,33 +207,25 @@
         </div>
 
         <div class="swiper-slide">
-            <div style="height: 50%; width:40%; border: thin solid grey; border-radius: 5px; background: rgba(0,0,0,0)" id="mapVis"></div>
-            Here we will add a brush plot with a tooltip which interact with either a bar chart or the map of the city,
-            showing the percentage of each category on each zip code.
+            <div class="row justify-content-center"
+                 style="height: 90%;  width: 70%; padding-left: 1vh; padding-bottom: 1vh; padding-right: 1vh; padding-top: 0vh">
+                <div id="timeLine" class="align-self-center"
+                     style="height: 29%; width:100%; border: thin solid grey; border-radius: 5px; background: rgba(0,0,0,0.2)">
+                </div>
+
+                <div id="mapVis" class="align-self-center"
+                     style="height: 71%; width:100%; border: thin solid grey; border-radius: 5px; background: rgba(1,1,1,0.0)">
+                </div>
+            </div>
         </div>
         <div class="swiper-slide" id="clockSlide" style="background-image:url('./data/clock.jpeg'); background-repeat: no-repeat;
   background-size: cover;">
             <div style="height: 50%; width:50%; margin-bottom: 200px;"  id="crimeClock"></div>
         </div>
         <div class="swiper-slide">
-            <h1>
-                About us
-                we will provide information about each member of the group with their cartoon face
-                Ayda Kianmehr, Hirva Bhagat, Hadi Rahmani, and Sungwon In
-            </h1>
-
-            <div>
-                New
-            </div>
-            <div>
-                again
-            </div>
-        </div>
-        <div class="swiper-slide">
-            <h3>
-                References
-            </h3>
-
+           About us
+            we will provide information about each member of the group with their cartoon face
+            Ayda Kianmehr, Hirva Bhagat, Hadi Rahmani, and Sungwon In
         </div>
     </div>
     <div class="swiper-pagination"></div>
@@ -321,7 +313,8 @@
 <script src="js/main.js"></script>
 <script src="js/DayNightVis.js"></script>
 <script src="js/barChart.js"></script>
-<script src="js/mapVis.js"></script>
+<script src="js/stackArea.js"></script>
+<script src="js/timeLine.js"></script>
 <script src="js/crimeClockVis.js"></script>
 
 

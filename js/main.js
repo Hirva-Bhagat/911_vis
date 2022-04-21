@@ -4,9 +4,22 @@
 
 // init global variables, switches, helper functions
 let myCrimeClock,
-    myDayNightScatter;
+    myDayNightScatter,
+    myBarChartTop,
+    myBarChartBottom,
+    myStack,
+    myTimeLine,
+    bar_button_top,
+    bar_button_bottom
+;
 let parseDate = d3.timeParse("%d/%m/%Y");
 let parseTime = d3.timeParse("%H:%M:%S");
+
+var mygroups = ["Vehicle_Accident", "Disable_Vehicle","Fire_Alarm","Respiratory_Emergency","Cardiac_Emergency",
+    "Fall_Victim"," VEHICLE ACCIDENT","Subject_in_Pain","Road_Obstruction", "Head_Injury"]
+let colorScale = d3.scaleOrdinal()
+    .domain(mygroups)
+    .range(['#377eb8','#e41a1c','#4daf4a','#984ea3','#ff7f00','#ffff33','#a65628','#f781bf','#999999', '#800000'])
 
 function updateAllVisualizations(){
     myCrimeClock.wrangleData()
@@ -46,10 +59,6 @@ d3.csv('data/911_clean.csv').then(function(d) {
 // initMainPage
 function initMainPage(allDataArray) {
 
-    console.log("check here");
-    // log data
-    console.log(allDataArray);
-
     // activity 1, pie chart
     //myCrimeClock = new CrimeClock('div_name')
 
@@ -59,8 +68,9 @@ function initMainPage(allDataArray) {
     myBarChartTop = new barChart('barVisTop', allDataArray, true);
     myBarChartBottom = new barChart('barVisBottom', allDataArray, false);
     myCrimeClock=new crimeClockVis('crimeClock',allDataArray)
-    myMap = new MapVis('mapVis', allDataArray);
 
+    myStack = new stackArea('mapVis', allDataArray);
+    myTimeLine = new timeLine('timeLine', allDataArray);
 
     bar_button_top = d3.select("#change-top");
     bar_button_bottom = d3.select("#change-bottom");
