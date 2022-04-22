@@ -77,7 +77,10 @@
             object-fit: cover;
         }
     </style>
-    <link rel="stylesheet" href="../911_vis-main 4/css/styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link href="css/picktim.css" rel="stylesheet" type="text/css">
+    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 
 <body>
@@ -191,7 +194,17 @@
         </div>
         <div class="swiper-slide" id="clockSlide" style="background-image:url('./data/clock.jpeg'); background-repeat: no-repeat;
   background-size: cover;">
-            <div style="height: 50%; width:50%; margin-bottom: 200px;"  id="crimeClock"></div>
+            <div id="container" style="width: 100%; height: 100%;">
+
+
+
+                <div id="box-1" class="box" >Box 1</div>
+                <div id="box-2" class="box">Box 2</div>
+                <div id="box-3" class="box"> <div class="timepicker" id="timepicker" style="margin-right: -450px; margin-top: 10px"></div></div>
+                <div id="box-4" class="box">Box 4</div>
+                <div id="box-5" class="box">Box 5</div>
+                <div id="box-6" class="box">Box 6</div>
+            </div>
         </div>
         <div class="swiper-slide">
            About us
@@ -280,11 +293,19 @@
         },
     });
 </script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
+        crossorigin="anonymous">
+</script>
+<script src="js/picktim.js"></script>
+<script src="js/jquery_functions.js"></script>
 <script src="js/main.js"></script>
 <script src="js/DayNightVis.js"></script>
 <script src="js/barChart.js"></script>
 <script src="js/mapVis.js"></script>
 <script src="js/crimeClockVis.js"></script>
+
+
 
 
 

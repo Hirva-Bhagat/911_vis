@@ -18,8 +18,8 @@ class crimeClockVis {
     initVis() {
         let vis = this;
         vis.radians = 0.0174532925;
-        vis.clockRadius = 250;
-        vis.margin = 70;
+        vis.clockRadius = 200;
+        vis.margin = 50;
         vis.width = (vis.clockRadius+vis.margin)*2;
         vis.height = (vis.clockRadius+vis.margin)*2;
         vis.hourHandLength = 2*vis.clockRadius/3;
@@ -74,8 +74,44 @@ class crimeClockVis {
 
         vis.svg = d3.select("#"+vis.parentElement).append("svg")
             .attr('class','clock')
-            .attr("width", vis.width)
-            .attr("height", vis.height);
+            .attr("width", "90%")
+            .attr("height", "90%")
+            .style("display", "block")
+            .style("margin","auto");
+
+        vis.select_time = vis.svg.append("foreignObject").attr("y", 20)
+            .attr("x",300)
+            .attr("width", "50%")
+            .attr("height", "50%")
+            .html(function(d) {
+
+
+            })
+
+
+
+
+        vis.top3 = d3.select("#box-2").append("svg")
+            .attr('class','crime charts')
+            .attr("width", "90%")
+            .attr("height", "90%")
+            .style("display", "block")
+            .style("margin","auto");
+
+        vis.barsvg = d3.select("#box-4").append("svg")
+            .attr('class','bar charts')
+            .attr("width", "90%")
+            .attr("height", "90%")
+            .style("display", "block")
+            .style("margin","auto");
+
+        vis.linesvg = d3.select("#box-5").append("svg")
+            .attr('class','line charts')
+            .attr("width", "90%")
+            .attr("height", "90%")
+            .style("display", "block")
+            .style("margin","auto");
+
 
         vis.face = vis.svg.append('g')
             .attr('id','clock-face')
@@ -202,6 +238,7 @@ class crimeClockVis {
                 return 'rotate('+ d.scale(d.value) +')';
             });
         d3.select(self.frameElement).style("height", vis.height + "px");
+
 
         vis.wrangleData()
 

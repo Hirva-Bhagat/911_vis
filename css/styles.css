@@ -1,3 +1,21 @@
+.Center {
+    width:200px;
+    height:200px;
+    position: fixed;
+    background-color: blue;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -100px;
+}
+#container {width:100%; height: 100%; margin:30px auto; clear: both; padding: 5px 0}
+#box-1 {outline: 1px solid red; float: left; width: 100%; height: 9%;}
+#box-2 {outline: 1px solid olive; float: right; width: 53%; height: 30%; justify-content: center;}
+#box-3 {outline: 1px solid fuchsia; float: left; width: 46%; height: 75%}
+#box-4 {outline: 1px solid maroon; float: right; width: 27%; height: 50%;}
+#box-5 {outline: 1px solid maroon; float: right; width: 27%; height: 50%;}
+#box-6 {outline: 1px solid blue; float: left; width: 100%; height: 5%;}
+
 .tooltip {
     position: absolute;
     text-align: center;
@@ -9,6 +27,13 @@
 }
 .tooltip h4 {
     font: 14px sans-serif;
+}
+.bar{
+
+}
+.charts{
+    background: lightcyan;
+    opacity: 80%;
 }
 
 .connection {
@@ -81,3 +106,4 @@ fill: rgba(10, 117, 140, 0.47);
 .hour-label{
     font-size: 24px;
 }
+

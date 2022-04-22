@@ -25,5 +25,19 @@ $(document).ready(function(){
         $('#comparingcallNum').html("You were off by " + userOff + " calls. There are actually <strong> 2,373 unique calls </strong> in Philadelphia!");
 
     });
+    $(".timepicker").picktim({
+        mode:'h12',
+        backgroundColor: "#EEE",
+        borderColor: "#DDD",
+        textColor: "#333",
+        symbolColor: "#333",
+        orientation:"bottomLeft",
+        defaultValue:'00:00',
+        appendTo:'#box-3'
+
+
+    });
 });
+
+
 
