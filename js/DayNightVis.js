@@ -37,7 +37,7 @@ function renderBarChart(data) {
     bars.enter()
         .append("rect")
         .attr("class", "bar")
-        .attr("fill", "navy")
+        .attr("fill", "indianred")
         //.transition(t)
         .attr("x", d => dayx(d.Category))
         .attr("y", d => dayy(d.Count))
@@ -49,6 +49,7 @@ function renderBarChart(data) {
     dayxAxisGroup = daysvg.select(".x-axis")
         //.attr('transform', 'translate(0,' + (height - margin.bottom - margin.top) + ')')
         .attr("class", "x-axis axis")
+        .attr("color","white")
         .attr("transform", "translate(0," + dayheight + ")")
         .call(d3.axisBottom(dayx));
 
@@ -56,12 +57,14 @@ function renderBarChart(data) {
 
 
     dayyAxisGroup = daysvg.select(".y-axis")
+        .attr("color","white")
         .call(dayyAxis);
 
 
     //svg.select("text.axis-title").remove();
     daysvg.append("text")
         .attr("class", "axis-title")
+        .attr("fill","white")
         .attr("x", -5)
         .attr("y", -15)
         .attr("dy", ".1em")
