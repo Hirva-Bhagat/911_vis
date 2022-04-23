@@ -132,3 +132,7 @@ p.tooltip {
     font: 12px sans-serif;
     pointer-events: none;
 }
+
+.tooltip_stack{
+    font-size: 13px;
+}

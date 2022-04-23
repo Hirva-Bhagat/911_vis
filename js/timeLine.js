@@ -1,6 +1,7 @@
-timeLine = function (_parentElement, _data) {
+timeLine = function (_parentElement, _data, stack) {
     this.parentElement = _parentElement;
     this.data = _data;
+    this.stack = stack;
     this.displayData = [];
     //this.parseDate = d3.timeParse("%m/%d/%Y");
     //this.parseDate = d3.timeFormat("%b");
@@ -14,7 +15,7 @@ timeLine = function (_parentElement, _data) {
 timeLine.prototype.initVis = function () {
     let vis = this;
 
-    vis.margin = {top: 20, right: 50, bottom: 20, left: 50};
+    vis.margin = {top: 40, right: 50, bottom: 30, left: 50};
     vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
     vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
@@ -25,21 +26,12 @@ timeLine.prototype.initVis = function () {
         .append("g")
         .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
-    // clip path
-    vis.svg.append("defs")
-        .append("clipPath")
-        .attr("id", "clip")
-        .append("rect")
-        .attr("width", vis.width)
-        .attr("height", vis.height)
-        .attr("transform", "translate(20," + 0 + ")");
-
     // add title
     vis.svg.append('g')
         .attr('class', 'title')
         .append('text')
-        .text('Title for Timeline')
-        .attr('transform', `translate(${vis.width-100}, 20)`)
+        .text('Number of all 911 calls by Time')
+        .attr('transform', `translate(120, -10)`)
         .attr('text-anchor', 'middle');
 
     // init scales
@@ -76,19 +68,7 @@ timeLine.prototype.initVis = function () {
     vis.timePath = vis.svg.append("path")
         .attr("class", "area area-time");
 
-    // init brush
-    vis.brush = d3.brushX()
-        .extent([[0, 0], [vis.width, vis.height]])
-        .on("brush end", function (event) {
-            selectedTimeRange = [vis.x(event.selection[0]), vis.x(event.selection[1])];
-            console.log(selectedTimeRange);
-            //myMapVis.wrangleData(); // TODO: Uncomment when implemented
-        });
 
-    vis.brushGroup = vis.svg.append("g")
-        .attr("class", "brush")
-        .attr("transform", "translate(20," + 0 + ")")
-        .call(vis.brush);
 
     // init basic data processing
     this.wrangleData();
@@ -118,8 +98,6 @@ timeLine.prototype.wrangleData = function () {
     vis.preProcessedData.sort((a, b) => {
         return a.date - b.date;
     })
-
-    console.log(vis.preProcessedData);
 
     this.updateVis();
 }
@@ -151,7 +129,64 @@ timeLine.prototype.updateVis = function () {
         .attr("transform", "translate(20," + 0 + ")")
         .attr("d", vis.area)
 
-    vis.brushGroup
-        .call(vis.brush);
+    var hover_line_group = vis.svg.append("g")
+        .attr("class", "hover-line");
+
+    var hover_line = hover_line_group
+        .append("line")
+        .attr("stroke", "red")
+        .attr("x1", 10).attr("x2", 10)
+        .attr("y1", 0).attr("y2", vis.height);
+
+    var hoverX = hover_line_group.append('text')
+        .attr("class", "hover-text")
+        .attr('dy', "1.00em");
+
+    var hoverY = hover_line_group.append('text')
+        .attr("class", "hover-text")
+        .attr('dy', "0.35em");
+
+    vis.svg.append("rect")
+        .data(vis.preProcessedData)
+        .attr("fill", "none")
+        .attr("class", "overlay")
+        .attr("width", vis.width)
+        .attr("height", vis.height);
+    vis.svg
+        .on("mouseout", hoverMouseOff)
+        .on("mousemove", hoverMouseOn);
+
+    let bisectDate = d3.bisector(function(d) { return d.date; }).left;
+
+    function hoverMouseOn(event) {
+        var mouse_x = d3.pointer(event)[0];
+        var calenderNameFormat = d3.timeFormat("%Y-%m-%d");
+        var date_x = calenderNameFormat(vis.x.invert(mouse_x - 20));
+
+        var x0 = vis.x.invert(mouse_x - 20)
+        var  i = bisectDate(vis.preProcessedData, x0, 1)
+
+        console.log(i);
+        var  d0 = vis.preProcessedData[i - 1]
+        var  d1 = vis.preProcessedData[i]
+        var  d = x0 - d0.date > d1.date - x0 ? d1 : d0
+
+        hoverX.text("Date: " + date_x)
+            .attr('x', mouse_x + 5)
+            .attr('y', 20);
+        hoverY.text("Total Call: " + d.sum)
+            .attr('x', mouse_x + 5)
+            .attr('y', 10);
+
+        hover_line.attr("x1", mouse_x).attr("x2", mouse_x)
+        hover_line_group.style("opacity", 100);
+
+        vis.stack.updateNum(date_x, mouse_x, i);
+    }
+
+    function hoverMouseOff() {
+        hover_line_group.style("opacity", 0);
+        vis.stack.updateNone();
+    }
 
 };

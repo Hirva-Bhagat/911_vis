@@ -84,26 +84,42 @@ class barChart {
     wrangleData() {
         let vis = this
 
+        console.log(vis.data);
+
         vis.displayData = [];
         vis.groupData = d3.nest()
             .key(function(d){
                 return d.Reason;
-            })
-            .rollup(function(leaves){
-                return d3.sum(leaves, function(d){
-                    return leaves.length;
-                });
             }).entries(vis.data)
+
+        console.log(vis.groupData);
+
+        vis.groupData.forEach(row => {
+            vis.displayData.push(
+                {key: row.key, value: row.values.length}
+            )
+        })
+
+        console.log(vis.displayData);
 
         // Whether given class is descending order or ascending order
         if (this.order){
-            vis.groupData.sort((a,b) => {return b.value - a.value})
+            vis.displayData.sort((a,b) => {return b.value - a.value})
         } else {
-            vis.groupData.sort((a,b) => {return a.value - b.value})
+            vis.displayData.sort((a,b) => {return a.value - b.value})
         }
 
 
-        vis.topTenData = vis.groupData.slice(0, 10);
+        vis.topTenData = vis.displayData.slice(0, 11);
+
+        if (this.order){
+            vis.topTenData.splice(6, 1);
+        }
+        else {
+            vis.topTenData.splice(11, 1);
+        }
+
+        console.log(vis.topTenData);
 
         vis.updateVis();
     }
@@ -113,8 +129,8 @@ class barChart {
         // Color scale for the bar chart
         vis.colorScale = d3.scaleSequential()
             .interpolator(d3.interpolatePuRd)
-            .domain([d3.min(vis.groupData, d=>d.value),
-                d3.max(vis.groupData, d=>d.value)])
+            .domain([d3.min(vis.displayData, d=>d.value),
+                d3.max(vis.displayData, d=>d.value)])
 
         // update the x and y domain
         vis.x.domain([0,d3.max(vis.topTenData, d=>d.value)])
