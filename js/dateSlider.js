@@ -1,4 +1,3 @@
-
 class myDateSlider {
 
     // constructor method to initialize Timeline object

@@ -96,34 +96,52 @@
     <div class="swiper-wrapper">
 
         <!-- Create a div where the graph will take place -->
-        <div style = "background-image: url('figures/city.jpeg')" class="swiper-slide">
+        <div style = "background-image: url('figures/emergency.jpeg'); background-size: 100% 100%;" class="swiper-slide">
 
-            <h1 class="align-self-center" style="color: maroon; height: 80%;  width: 30%; padding-left: 10vh; padding-bottom: 1vh; padding-right: 10vh; padding-top: 0vh; font-size: xxx-large">
-                911 Calls <br> in Pennsylvania
-            </h1>
+
 
             <div class="row justify-content-center"
-                 style="height: 80%;  width: 50%; padding-left: 10vh; padding-bottom: 1vh; padding-right: 10vh; padding-top: 0vh">
+                >
+                <h1 class="align-self-center" style="color: white; font-size:33px; height: 100%;  width: 30%; padding-left: 4vh;
+                padding-bottom: 40vh; padding-right: 5vh; padding-top: 30vh; background-color: midnightblue; opacity: 95%">
+                    <span style="color: orange">911 Calls in Pennsylvania</span>
+                    <p1 class="align-self-center" style="color: white; text-align: left; text-align: justify; font-size:19px">
+                    <ul> <br>
+                    <li>The efficient management and provision of 911 calls have been consistently challenging.</li>
+                        <br>
 
+                    <li>Several stakeholder groups have been trying to collect, use, and analyze the relevant information in the last years to resolve the issues such as <span style="color: orange">inadequate
+                        resources, lag time for a proper response, and other consequences.</span></li>
+                        <br>
+
+                    <li>A systemized plan for a more effective management plan will benefit residents and visitors. </li>
+                        <br>
+
+                    <li>Such a proper plan certainly requires a <span style="color: orange">comprehensive understanding of the statistics, motivates a
+                        compelling information visualization,</span> which our group has been trying to provide.</li>
+
+                    </ul>
+                    </p1>
+                </h1>
             </div>
         </div>
 
 <!-- Here I am adding the query -->
 
-        <div class="swiper-slide">
-            <h1 class="align-self-center" style="height: 50%; width:50%; padding-bottom: 40vh; background: rgba(1,1,1,0.5)">
-                <img src="figures/whentocall911_2.png">
-                <img src="figures/whentocall911_6.png">
+        <div class="swiper-slide" style="background-color: honeydew">
+            <h1 class="align-self-center" style="height: 50%; width:30%; padding-bottom: 50vh; background: honeydew">
+                <img src="figures/whentocall911_2.png" style="width:400px;height:340px;">
+                <img src="figures/whentocall911_6.png" style="width:400px;height:430px;">
             </h1>
 
             <div class="row section" id="hookVis">
                 <div class="col-md-6 leftAlignItems" id="userGuess">
                     <div  class="align-self-center"
-                          style="height: 50%; width:50%; padding-left: 15vh; background: white">
-                        <img src="figures/emergency-phone-call-cartoon-kl7pvrj.jpeg">
+                          style="height: 50%; width:50%; padding-left: 30vh; background: honeydew">
+                        <img src="figures/hand.jpeg" style="width:300px;height:300px;">
                     </div>
 
-                    <h1 id="callNumQuestion">Average daily 911 calls in Pennsylvania?</h1>
+                    <h1 id="callNumQuestion">How many 911 calls do Pennsylvania receive on  <br>average during a day?</h1>
                     <br>
                     <form id="numForm">
                         <input placeholder=" Guess Here!" type="number" id="userNum" value="">
@@ -137,43 +155,11 @@
         </div>
 
 
-        <div class="swiper-slide">
-
-            <div class="row justify-content-center"
-                 style="height: 50%;  width: 150%; padding-left: 10vh; padding-bottom: 40vh; padding-right: 5vh; padding-top: 0vh">
-                <div  class="align-self-center"
-                      style="height: 80%; width:100%;  background: rgba(1,1,1,0.5)">
-                    <img src="figures/lego.png">
-                </div>
-                <h1 class="align-self-center" style="color: orange; height: 80%;  width: 91%; padding-left: 5vh; padding-bottom: 4vh; padding-right: 5vh; padding-top: 1vh; background-color: grey">
-                    911 Operation system
-                    <p class="align-self-center" style="color: yellow; font-size:18px; height: 100%;  width: 96%; padding-left: 5vh; padding-bottom: 4vh; padding-right: 5vh; padding-top: 1vh">
-                        The efficient management and provision of 911 calls (an emergency telephone number in the United States)
-                        have been consistently challenging. As a result, several stakeholder groups have been trying to collect,
-                        use, and analyze the relevant information in the last years to resolve the issues such as inadequate
-                        resources, lag time for a proper response, and other consequences link. Achieving a systemized plan
-                        for a more effective management plan will benefit all stakeholders
-                        providing service and the residents and visitors. Such a proper plan certainly requires a
-                        comprehensive understanding of the statistics showing the information, which motivates a
-                        compelling information visualization, which our group has been trying to provide.
-                    </p>
-                </h1>
-
-
-
-                <!-- <div  class="align-self-center"
-                      style="height: 49%; width:100%; background: rgba(1,1,1,0.5)">
-                      <img src="figures/4.png">
-                 </div>-->
-            </div>
-        </div>
-
-
 
         <div style = "background-image: url('figures/day7.jpeg')"  class="swiper-slide">
 
             <div    class="row justify-content-center"
-                    style="height: 40%; width:40%; padding-right: 10vh; padding-left: 2vh; padding-bottom: 10vh; border: thin solid grey; border-radius: 5px; background: rgba(1,1,1,0.5); position: relative" id="DayNightVis">
+                    style="height: 40%; width:40%; padding-right: 10vh; padding-left: 1vh; padding-bottom: 0vh; padding-top: 0vh; border: thin solid grey; border-radius: 5px; background: rgba(1,1,1,0.5); position: relative" id="DayNightVis">
                 <!-- drop down menu -->
                 <div class="row justify-content-center">
                     <div class="align-self-center">
@@ -188,31 +174,46 @@
                     </div>
                 </div>
             </div>
-            <h1 class="align-self-center" style="color: white; height: 80%;  width: 30%; padding-left: 10vh; padding-bottom: 1vh; padding-right: 10vh; padding-top: 0vh">
-                Average diurnal 911 calls in Pennsylvania
-                <p class="align-self-center" style="color: white; font-size:19px; height: 80%;  width: 90%; padding-left: 10vh; padding-bottom: 0vh; padding-right: 10vh; padding-top: 10vh">
+            <h1 style="color: white; text-align: left; height: 80%;  width: 40%; padding-left: 10vh; padding-bottom: 1vh; padding-right: 10vh; padding-top: 0vh">
+                Annual 911 calls in Pennsylvania
+                <p1  style="color: white; font-size:19px; text-align: left; text-align: justify; height: 80%;  width: 90%; padding-left: 10vh; padding-bottom: 0vh; padding-right: 10vh; padding-top: 10vh">
+                    <ul> <br>
 
-                </p>
+                <li> Most 911 calls are related to emergency.
+                    <br>
+                <li> Most 911 calls happen during daytime.
+                    <br>
+                <li> <span style="color: orange">It seems that there is a need for emergency-related infrastructures in Pennsylvania to respond citizens needs in a timely manner.</span>
+
+                </ul>
+
+                </p1>
             </h1>
         </div>
 
-        <div style = "background-image: url('crime2.jpeg')" class="swiper-slide">
+        <div style = "background-image: url('figures/sky.jpeg'); background-size: 100% 100%;" class="swiper-slide" >
 
-            <h1 class="align-self-center" style="color: white; height: 80%;  width: 30%; padding-left: 10vh; padding-bottom: 1vh; padding-right: 10vh; padding-top: 0vh">
-                Type of Crime in Pennsylvania
-                <p class="align-self-center" style="color: white; font-size:19px; height: 80%;  width: 90%; padding-left: 10vh; padding-bottom: 0vh; padding-right: 10vh; padding-top: 10vh">
-                    This graph provides general information about the number of calls for different
-                    categories such as traffic, fire, and emergency calls. For example, it can be
-                    inferred that traffic issues, particularly car accidents and disabled vehicles,
-                    are the most common reason for the call, with a considerable difference from the
-                    other categories. Fire alarms and emergency issues such as respiratory and cardiac
-                    emergencies are categorized. The statistics for the bottom categories are also visualized,
-                    showing orders of magnitude variations from the most common types of calls.
-                </p>
+            <h1 style="color: white; text-align: left; height: 80%;  width: 40%; padding-left: 10vh; padding-bottom: 1vh; padding-right: 10vh; padding-top: 0vh">
+                Subcategories of 911 calls in Pennsylvania
+                <p1 style="color: white; text-align: left; font-size:19px; height: 80%;  width: 90%; padding-left: 10vh; padding-bottom: 0vh; padding-right: 10vh; padding-top: 10vh">
+                <ul>
+                <br>
+                 <li> Some of the subcategories of three major reasons of calls (emergency, traffic and fire) are vehicle acciedents,
+                fire alarms, respiratory emergencies, cardiac emergencies, head inguries, etc.
+                 <br>
+                <li> Traffic issues, particularly car accidents and disabled vehicles, are the most common reason of the calls annually.
+                <br>
+                <li> The least common reasons of 911 calls in this state are bomb device-related calls, plane crash, train crash and active shootings.
+                <br>
+                <li> <span style="color: orange"> Reasons of calls give a better picture of what managers should be prepared for. Emergency and accident related calls
+                such as vehicle accidents, respiratory and caridac diseases are among the top reasons of calls and need extra preparedness</span>
+
+                </ul>
+                </p1>
             </h1>
 
             <div class="row justify-content-center"
-                 style="height: 80%;  width: 50%; padding-left: 10vh; padding-bottom: 1vh; padding-right: 10vh; padding-top: 0vh">
+                 style="height: 80%;  width: 50%; padding-left: 10vh; padding-bottom: 1vh; padding-right: 10vh; padding-top: 0vh;">
 
                 <div id="barVisTop" class="align-self-center"
                      style="height: 49%; width:100%; border: thin solid grey; border-radius: 5px; background: rgba(1,1,1,0.5)">
@@ -226,16 +227,16 @@
             </div>
         </div>
 
-        <div class="swiper-slide">
+        <div style = "background-image: url('figures/back2.jpeg'); background-size: 100% 100%;" class="swiper-slide">
             <div class="row justify-content-center"
-                 style="height: 90%;  width: 70%; padding-left: 1vh; padding-bottom: 1vh; padding-right: 1vh; padding-top: 0vh">
+                 style="height: 90%;  width: 70%; padding-left: 1vh; padding-bottom: 1vh; padding-right: 1vh; padding-top: 0vh;">
                 <div id="timeLine" class="align-self-center"
                      style="height: 29%; width:100%; border: thin solid grey; border-radius: 5px; background: rgba(0,0,0,0.2)">
                 </div>
-
                 <div id="mapVis" class="align-self-center"
-                     style="height: 71%; width:100%; border: thin solid grey; border-radius: 5px; background: rgba(1,1,1,0.0)">
+                     style="height: 71%; width:100%; border: thin solid grey; border-radius: 5px; background: rgba(1,1,1,0.2)">
                 </div>
+
             </div>
         </div>
         <div class="swiper-slide" id="clockSlide" style="background-image:url('./data/clock.jpeg'); background-repeat: no-repeat;
@@ -252,41 +253,49 @@
                 <div id="box-6" class="box">Box 6</div>
             </div>
         </div>
-        <div class="swiper-slide">
-           About us
-            we will provide information about each member of the group with their cartoon face
-            Ayda Kianmehr, Hirva Bhagat, Hadi Rahmani, and Sungwon In
 
-        </div>
         <div class="swiper-slide">
 
             <h1 class="align-self-center" style="height: 50%; width:50%; padding-bottom: 40vh; background: white">
 
-                <h1>  <img src="figures/Ayda.png"> <p> Ayda Kianmher Ayda is a PhD student in Urban Affairs and Planning at Virginia Tech</p> </h1>
+                <h1>  <img src="figures/Ayda.png" alt="Ayda Kianmehr" style="width:300px;height:300px;"> <p> Ayda Kianmher</p> </h1>
 
             </h1>
 
-            <h1 class="align-self-center" style="height: 50%; width:50%; padding-bottom: 40vh; background: white">
+            <h1 class="align-self-center" style="height: 50%; width:50%; padding-bottom: 40vh; background: white)">
 
-                <h1> <img src="figures/Hadi.png"> <p> Hadi Rahmaninejad Hadi is a PhD student in Physics at Virginia Tech</p> </h1>
+                <h1> <img src="figures/whentocall911_2.png" alt="Hirva Bhagat" style="width:300px;height:300px;"> <p>Hirva Bhagat</p> </h1>
 
             </h1>
 
+<<<<<<< HEAD
             <h1 class="align-self-center" style="height: 50%; width:50%; padding-bottom: 40vh; background: white;)">
+=======
+            <h1 class="align-self-center" style="height: 50%; width:50%; padding-bottom: 40vh; background: white">
+>>>>>>> c11425c7392131323d2e30ee303098f888e2ab28
 
-                <h1> <img src="figures/whentocall911_2.png"> <p>Ayda is a PhD student in Urban Affairs and Planning at Virginia Tech</p> </h1>
+                <h1> <img src="figures/Hadi.png" alt="Hadi Rahmani" style="width:300px;height:300px;"> <p> Hadi Rahmani </p> </h1>
 
             </h1>
 
+
+
             <h1 class="align-self-center" style="height: 50%; width:50%; padding-bottom: 40vh; background: white">
 
-                <h1> <img src="figures/whentocall911_2.png"> <p>Ayda is a PhD student in Urban Affairs and Planning at Virginia Tech</p> </h1>
+                <h1> <img src="figures/Sungwon.png" alt="Sungwon In"  style="width:300px;height:300px;"> <p>Sungwon In</p> </h1>
 
             </h1>
 
     </div>
 
-    <div class="swiper-pagination"></div>
+        <div style = "background-image: url('figures/911.jpeg'); background-size: 100% 100%;" class="swiper-slide">
+            <div class="row justify-content-center"
+                 style="height: 90%;  color: white; width: 70%; padding-left: 1vh; padding-bottom: 1vh; padding-right: 1vh; padding-top: 0vh;">
+                <h1> <p> References</p>
+
+                </h1>
+            </div>
+        </div>
 
 
 </div>
@@ -373,7 +382,7 @@
     }
 </script>
 <script src="./js/dateSlider.js"></script>
-
+<script src="./js/crimeCharts.js"></script>
     <!-- Swiper JS -->
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

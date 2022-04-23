@@ -111,7 +111,7 @@ function dataManipulation() {
 
 
 var mygroups = ["Vehicle_Accident", "Disable_Vehicle","Fire_Alarm","Respiratory_Emergency","Cardiac_Emergency",
-    "Fall_Victim"," VEHICLE ACCIDENT","Subject_in_Pain","Road_Obstruction", "Head_Injury"]
+    "Fall_Victim","Subject_in_Pain","Road_Obstruction", "Head_Injury", "Unknown_Medical_Emergency"]
 let colorScale = d3.scaleOrdinal()
     .domain(mygroups)
     .range(['#377eb8','#e41a1c','#4daf4a','#984ea3','#ff7f00','#ffff33','#a65628','#f781bf','#999999', '#800000'])
@@ -166,7 +166,7 @@ function initMainPage(allDataArray) {
     myCrimeClock=new crimeClockVis('box-3',allDataArray)
 
     myStack = new stackArea('mapVis', allDataArray);
-    myTimeLine = new timeLine('timeLine', allDataArray);
+    myTimeLine = new timeLine('timeLine', allDataArray, myStack);
 
     bar_button_top = d3.select("#change-top");
     bar_button_bottom = d3.select("#change-bottom");

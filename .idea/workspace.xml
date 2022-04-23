@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <list default="true" id="bd776a6d-c45f-484c-a794-4ddc7f5107b5" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/dateSlider.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/911_vis.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/911_vis.iml" afterDir="false" />
@@ -18,6 +19,11 @@
 =======
     <list default="true" id="bd776a6d-c45f-484c-a794-4ddc7f5107b5" name="Changes" comment="" />
 >>>>>>> d0e79a04441d86712591256b80a5512e70e29a3e
+=======
+    <list default="true" id="bd776a6d-c45f-484c-a794-4ddc7f5107b5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+>>>>>>> c11425c7392131323d2e30ee303098f888e2ab28
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -119,7 +125,13 @@
       <workItem from="1650318652371" duration="570000" />
       <workItem from="1650499362352" duration="253000" />
       <workItem from="1650509057693" duration="186000" />
+<<<<<<< HEAD
 >>>>>>> d0e79a04441d86712591256b80a5512e70e29a3e
+=======
+      <workItem from="1650601699522" duration="65000" />
+      <workItem from="1650674419758" duration="1042000" />
+      <workItem from="1650687369026" duration="178000" />
+>>>>>>> c11425c7392131323d2e30ee303098f888e2ab28
     </task>
     <servers />
   </component>

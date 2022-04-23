@@ -159,4 +159,11 @@ p.tooltip {
     font: 12px sans-serif;
     pointer-events: none;
 }
+<<<<<<< HEAD
 >>>>>>> d0e79a04441d86712591256b80a5512e70e29a3e
+=======
+
+.tooltip_stack{
+    font-size: 13px;
+}
+>>>>>>> c11425c7392131323d2e30ee303098f888e2ab28

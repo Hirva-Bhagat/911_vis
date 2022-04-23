@@ -83,26 +83,7 @@ class crimeClockVis {
 
 
         myDateSlider = new myDateSlider('box-3', vis.clockData);
-        vis.top3 = d3.select("#box-2").append("svg")
-            .attr('class','crime charts')
-            .attr("width", "90%")
-            .attr("height", "90%")
-            .style("display", "block")
-            .style("margin","auto");
-
-        vis.barsvg = d3.select("#box-4").append("svg")
-            .attr('class','bar charts')
-            .attr("width", "90%")
-            .attr("height", "90%")
-            .style("display", "block")
-            .style("margin","auto");
-
-        vis.linesvg = d3.select("#box-5").append("svg")
-            .attr('class','line charts')
-            .attr("width", "90%")
-            .attr("height", "90%")
-            .style("display", "block")
-            .style("margin","auto");
+        myCrimeCharts=new myCrimeCharts(vis.clockData);
 
 
         vis.face = vis.svg.append('g')
@@ -127,21 +108,15 @@ class crimeClockVis {
             }).on('mouseover', function(event, d){
             console.log("here")
             d3.select(this)
+                .attr('y1',vis.clockRadius)
                 .style('stroke-width', '6px')
                 .style("opacity","0.8")
                 .style('color', 'rgba(173,222,255,0.65)')
 
-            vis.tooltip
-                .style("opacity", 1)
-                .style("left", event.pageX + 20 + "px")
-                .style("top", event.pageY + "px")
-                .html(`
-         <div style="border: thin || transparent || skyblue; border-radius: 5px; background: lightsteelblue; padding: 10px">
-             <h3>At this time<h3>
-             <h4>Number of calls till this hour</h4>
-             <h4>Number of calls in the last hour</h4> 
-             <h4>top 3 reasons</h4>                        
-         </div>`);
+
+
+
+
         })
             .on('mouseout', function(event, d){
                 d3.select(this)
