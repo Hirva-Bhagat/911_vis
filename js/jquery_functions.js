@@ -18,14 +18,15 @@ $(document).ready(function() {
     $('#numForm').submit((event) => {
         event.preventDefault();
         var userInput = $('#userNum').val();
-        var totalcalls = 2373
+        var totalcalls = 395
         var userOff = Math.abs(userInput - totalcalls).toLocaleString();
 
         $('#userGuess').fadeOut('slow');
-        $('#comparingcallNum').html("You were off by " + userOff + " calls. There are actually <strong> 2,373 unique calls </strong> in Pennsylvania!");
+        $('#comparingcallNum').html("You were off by " + userOff + " calls. <br>There are actually <span style=\"color: red\"><strong><br>395</strong></span><br>unique calls on average in Pennsylvania!");
         // $('#hook-comparingGuess').delay(1000).fadeIn(1600, () => {
         //
         // });
+
 
     });
 });
