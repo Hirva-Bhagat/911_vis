@@ -79,18 +79,10 @@ class crimeClockVis {
             .style("display", "block")
             .style("margin","auto");
 
-        vis.select_time = vis.svg.append("foreignObject").attr("y", 20)
-            .attr("x",300)
-            .attr("width", "50%")
-            .attr("height", "50%")
-            .html(function(d) {
-
-
-            })
 
 
 
-
+        myDateSlider = new myDateSlider('box-3', vis.clockData);
         vis.top3 = d3.select("#box-2").append("svg")
             .attr('class','crime charts')
             .attr("width", "90%")

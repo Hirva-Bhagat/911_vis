@@ -1,4 +1,4 @@
-var topTen_Global;
+let top_ten_key;
 
 class barChart {
 
@@ -103,9 +103,7 @@ class barChart {
         }
 
 
-        vis.topTenData = vis.groupData.slice(0, 10)
-
-        topTen_Global = vis.topTenData;
+        vis.topTenData = vis.groupData.slice(0, 10);
 
         vis.updateVis();
     }
@@ -121,6 +119,12 @@ class barChart {
         // update the x and y domain
         vis.x.domain([0,d3.max(vis.topTenData, d=>d.value)])
         vis.y.domain(vis.topTenData.map(d=>d.key))
+
+        if (this.order){
+
+            top_ten_key = vis.topTenData.map(d=>d.key);
+            console.log(top_ten_key);
+        }
 
         vis.svg.select(".bar-x-axis")
             .call(vis.xAxis)

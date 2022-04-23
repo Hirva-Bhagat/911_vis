@@ -4,6 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="bd776a6d-c45f-484c-a794-4ddc7f5107b5" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/dateSlider.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/911_vis.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/911_vis.iml" afterDir="false" />
@@ -14,6 +15,9 @@
       <change beforePath="$PROJECT_DIR$/js/jquery_functions.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/jquery_functions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/main.js" afterDir="false" />
     </list>
+=======
+    <list default="true" id="bd776a6d-c45f-484c-a794-4ddc7f5107b5" name="Changes" comment="" />
+>>>>>>> d0e79a04441d86712591256b80a5512e70e29a3e
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -61,7 +65,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.index.html (1)">
+  <component name="RunManager" selected="JavaScript Debug.index.html">
     <configuration name="index.html (1)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/911_vis-main 9/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
@@ -70,8 +74,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JavaScript Debug.index.html (1)" />
         <item itemvalue="JavaScript Debug.index.html" />
+        <item itemvalue="JavaScript Debug.index.html (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -105,9 +109,17 @@
       <workItem from="1649966309631" duration="42000" />
       <workItem from="1649966372203" duration="2966000" />
       <workItem from="1649969748388" duration="198000" />
+<<<<<<< HEAD
       <workItem from="1650194236585" duration="15333000" />
       <workItem from="1650602102253" duration="9548000" />
       <workItem from="1650664078690" duration="3726000" />
+=======
+      <workItem from="1650194236585" duration="12191000" />
+      <workItem from="1650246098826" duration="3503000" />
+      <workItem from="1650318652371" duration="570000" />
+      <workItem from="1650499362352" duration="253000" />
+      <workItem from="1650509057693" duration="186000" />
+>>>>>>> d0e79a04441d86712591256b80a5512e70e29a3e
     </task>
     <servers />
   </component>
