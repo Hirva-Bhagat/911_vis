@@ -52,6 +52,7 @@ my_dataviz {
 }
 
 .clock{
+
     stroke: #000;
     stroke-width: 1px;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
