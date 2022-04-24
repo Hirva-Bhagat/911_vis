@@ -14,24 +14,21 @@ class myDateSlider {
         let vis = this;
 
 
+
+
+
         vis.margin = {top: 50, right: 20, bottom: 40, left: 160};
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
         // drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("foreignObject")
+            .attr("class","dataslider")
             .attr("width", 200)
             .attr("height", 80)
             .html(function(d) {
                 return '<input id="sTextbox" >\n'
                     +
                     '<input id="slider" type="range" min="0" max="258">'
-            })
-        vis.svg = d3.select("#" + vis.parentElement).append("foreignObject")
-            .attr("width", 500)
-            .attr("height", 80)
-            .html(function(d) {
-                return '<p id="datevalue"></p>\n' +
-                    '<div id="dateslider"></div>'
             })
 
 
