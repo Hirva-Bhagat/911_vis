@@ -8,13 +8,20 @@
     margin-top: -100px;
     margin-left: -100px;
 }
+.rstbtn{
+    margin-left: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
 #container {width:100%; height: 90%; margin:30px auto; clear: both; padding: 5px 0}
+#box-1{outline: 1px solid olive; float: left; width: 100%; height: 10%;}
 #box-2 {outline: 1px solid olive; float: right; width: 30%; height: 35%; justify-content: center;}
-#box-3 {outline: 1px solid fuchsia; float: left; width: 40%; height: 80%}
+#box-3 {outline: 1px solid fuchsia; float: left; width: 40%; height: 85%}
 #box-4 {outline: 1px solid maroon; float: right; width: 30%; height: 35%;}
-#box-5 {outline: 1px solid maroon; float: right; width: 40%; height: 45%;}
-#box-6 {outline: 1px solid blue; float: left; width: 20%; height: 45%;}
-#box-7 {outline: 1px solid blue; float: left; width: 100%; height: 19%;}
+#box-5 {outline: 1px solid maroon; float: right; width: 40%; height: 50%;}
+#box-6 {outline: 1px solid blue; float: left; width: 20%; height: 50%;}
+#box-7 {outline: 1px solid blue; float: left; width: 100%; height: 5%;}
 
 .tooltip {
     position: absolute;

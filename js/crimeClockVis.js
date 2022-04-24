@@ -72,15 +72,10 @@ class crimeClockVis {
 
         vis.picktime = d3.select("#" + vis.parentElement).append("foreignObject")
             .attr("class","timepicker")
-            .attr("width", 200)
+            .attr("width", 250)
             .attr("height", 80)
             .html(function(d) {
-                return '<button type="button"\n' +
-                    '                id="reset">\n' +
-                    '            Reset\n' +
-                    '        </button>'
-                +
-                    '<input type="time"\n' +
+                return'<input type="time"\n' +
                     '               id="timepick"\n' +
                     '               placeholder="Enter time">\n'
                     +
@@ -88,6 +83,16 @@ class crimeClockVis {
                     '                id="selectedTime">\n' +
                     '            Enter\n' +
                     '        </button>'
+            })
+        d3.select("#" + vis.parentElement).append("foreignObject")
+            .attr("class","rstbtn")
+            .attr("width", 30)
+            .attr("height", 30)
+            .html(function(d) {
+                return '<button type="button"\n' +
+                '                id="reset">\n' +
+                '            Reset\n' +
+                '        </button>'
             })
         d3.select("#reset").on("click", function() {
             clearInterval(vis.refreshId)
@@ -100,14 +105,14 @@ class crimeClockVis {
         })
 
 
-        vis.myDateSlider = new myDateSlider(vis,'box-6', vis.clockData);
+        vis.myDateSlider = new myDateSlider(vis,'box-3', vis.clockData);
         vis.myCrimeCharts=new myCrimeCharts(vis,vis.myDateSlider.grouped[100].values);
         vis.updateVis();	//draw them in the correct starting position
 
         vis.svg = d3.select("#"+vis.parentElement).append("svg")
             .attr('class','clock')
-            .attr("width", "90%")
-            .attr("height", "90%")
+            .attr("width", "100%")
+            .attr("height", "100%")
             .style("display", "block")
             .style("margin","auto");
 

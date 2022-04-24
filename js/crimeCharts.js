@@ -71,6 +71,8 @@ class myCrimeCharts {
             .attr("transform",
                 "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
+
+
         console.log(vis.clockvis.t)
         vis.updateData(vis.clockvis,vis.data)
 
@@ -135,9 +137,9 @@ class myCrimeCharts {
 
 
         console.log(clockvis.t.toLocaleTimeString('it-IT'))
-        let t=vis.clockvis.t.toLocaleTimeString('it-IT')
+        vis.t=vis.clockvis.t.toLocaleTimeString('it-IT')
         let closesti=null
-        let secs = timeToSecs(t);
+        let secs = timeToSecs(vis.t);
             let closest = null;
             vis.timesList[0].reduce((acc, obj, i) => {
                 //console.log(obj)
@@ -154,7 +156,7 @@ class myCrimeCharts {
         //console.log("closest:"+closest)
         //let h=parseInt(t.split(":")[0])
         console.log(vis.hourList)
-        vis.tillHour = vis.hourList.findIndex(item => item.key === t.split(":")[0]);
+        vis.tillHour = vis.hourList.findIndex(item => item.key === vis.t.split(":")[0]);
         if(vis.tillHour<0){ vis.tillHour=0
             vis.lineData=vis.hourList[0]
         }
@@ -173,6 +175,38 @@ class myCrimeCharts {
         vis.lineSvg.selectAll("*").remove();
         vis.bSvg.selectAll("*").remove();
         vis.barSvg.selectAll("*").remove();
+        d3.select("#box-5").selectAll("text").remove();
+        vis.lineSvg.append("g").append("text")
+            .text("Hours in a day")
+            .attr("class","labels")
+            .attr("x", vis.lineWidth)
+            .attr("y", 190)
+            .attr("font-family" , "sans-serif")
+            .attr("font-size" , "10px")
+            .attr("fill" , "black")
+            .attr("text-anchor", "middle");
+        vis.lineSvg.append("g").append("text")
+            .text("No of calls")
+            .attr("class","labels")
+            .attr("x", -50)
+            .attr("y", vis.lineHeight-135)
+            .attr("font-family" , "sans-serif")
+            .attr("font-size" , "10px")
+            .attr("fill" , "black")
+            .attr("text-anchor", "middle")
+            .attr("transform", "rotate(-90)");
+
+        d3.select("#box-5").append("div")
+            .attr("x", 50)
+            .attr("y", 30).
+        append("text")
+            .text("Number of calls sorted by cities till "+vis.t)
+            .attr("class","labels")
+            .attr("font-family" , "sans-serif")
+            .attr("font-size" , "5px")
+            .attr("fill" , "black")
+            .attr("text-anchor", "middle");
+
         vis.lineSvg.append("g")
             .attr("transform", "translate("+"0"+"," + vis.lineHeight + ")")
             .call(d3.axisBottom(vis.linex));
@@ -248,7 +282,7 @@ class myCrimeCharts {
                 .style("top", event.pageY + "px")
                 .html(`
          <div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 20px">
-             <h3>${"place"+d.data.twp}<h3>
+             <h3>${"place: "+d.data.twp}<h3>
              <h4> Count: ${d.data.count}</h4>                           
          </div>`);
         })
@@ -314,7 +348,7 @@ class myCrimeCharts {
             .style("text-anchor", "end")
             .attr("dx", "-.8em")
             .attr("dy", ".15em")
-            .attr("transform", "rotate(-10)");;
+            .attr("transform", "rotate(-10)");
 
         vis.barSvg.selectAll()
             .data(vis.xlist)
