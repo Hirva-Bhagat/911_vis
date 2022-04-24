@@ -33,6 +33,8 @@ class myCrimeCharts {
             .attr("class","charts callsPlaces")
             .attr("width",vis.bwidth)
             .attr("height",vis.bheight)
+        vis.disp = d3.select("#box-6")
+
 
         //console.log(vis.data)
         vis.linex = d3.scaleLinear()
@@ -61,7 +63,7 @@ class myCrimeCharts {
             .range([0, vis.barWidth])
             .padding(0.1);
         vis.bary = d3.scaleLinear()
-            .range([vis.barHeight-70, 0]);
+            .range([vis.barHeight-40, 0]);
 
 // append the svg object to the body of the page
 // append a 'group' element to 'svg'
@@ -166,6 +168,7 @@ class myCrimeCharts {
         }
         console.log(vis.tillHour)
 
+        vis.sum=d3.sum(vis.lineData, x => x.values.length)
         console.log(vis.lineData);
         vis.updateVis()
 
@@ -175,7 +178,12 @@ class myCrimeCharts {
         vis.lineSvg.selectAll("*").remove();
         vis.bSvg.selectAll("*").remove();
         vis.barSvg.selectAll("*").remove();
+        vis.disp.selectAll("*").remove();
         d3.select("#box-5").selectAll("text").remove();
+
+
+
+
         vis.lineSvg.append("g").append("text")
             .text("Hours in a day")
             .attr("class","labels")
@@ -188,7 +196,7 @@ class myCrimeCharts {
         vis.lineSvg.append("g").append("text")
             .text("No of calls")
             .attr("class","labels")
-            .attr("x", -50)
+            .attr("x", -40)
             .attr("y", vis.lineHeight-135)
             .attr("font-family" , "sans-serif")
             .attr("font-size" , "10px")
@@ -196,14 +204,24 @@ class myCrimeCharts {
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)");
 
-        d3.select("#box-5").append("div")
-            .attr("x", 50)
-            .attr("y", 30).
-        append("text")
-            .text("Number of calls sorted by cities till "+vis.t)
+    vis.bSvg.append("text")
+        .attr("x", vis.bheight-90)
+            .attr("y", vis.bwidth-15)
+            .text("No. of calls by cities till "+vis.t)
             .attr("class","labels")
             .attr("font-family" , "sans-serif")
-            .attr("font-size" , "5px")
+            .attr("font-size" , "10px")
+            .attr("fill" , "black")
+            .attr("text-anchor", "middle");
+
+
+        vis.barSvg.append("g").append("text")
+            .attr("x", 100)
+            .attr("y", 10)
+            .text("Top 3 high activity places ")
+            .attr("class","labels")
+            .attr("font-family" , "sans-serif")
+            .attr("font-size" , "10px")
             .attr("fill" , "black")
             .attr("text-anchor", "middle");
 
@@ -229,7 +247,7 @@ class myCrimeCharts {
 
 
         var bubble = d3.pack(vis.addList)
-            .size([vis.bwidth, vis.bwidth])
+            .size([vis.bwidth, vis.bheight])
             .padding(0.5);
         var color = d3.scaleOrdinal(d3.schemeCategory10)
 
@@ -335,29 +353,39 @@ class myCrimeCharts {
         //vis.add = vis.addbyplaces.findIndex(item => item.key === vis.selected_place);
         //console.log(vis.add)
         vis.xlist=vis.sortedData.slice(0,3)
-        console.log(vis.xlist.map((s)=>s.key))
+        //console.log(vis.xlist.map((s)=>s.key))
         vis.barx.domain(vis.xlist.map((s)=>s.key))
         vis.bary.domain([0, 80])
         vis.barSvg.append('g')
             .call(d3.axisLeft(vis.bary));
-        console.log(vis.places.map((s)=>s.key))
+        //console.log(vis.places.map((s)=>s.key))
         vis.barSvg.append('g')
-            .attr('transform', `translate(0, ${vis.barHeight-70})`)
+            .attr('transform', `translate(0, ${vis.barHeight-40})`)
             .call(d3.axisBottom(vis.barx))
             .selectAll("text")
             .style("text-anchor", "end")
             .attr("dx", "-.8em")
             .attr("dy", ".15em")
-            .attr("transform", "rotate(-10)");
+            .attr("transform", "rotate(-7)");
 
         vis.barSvg.selectAll()
             .data(vis.xlist)
             .enter()
             .append('rect')
             .attr('x', (s) => vis.barx(s.key))
-            .attr('y', (s) => vis.bary(s.values.length)-70)
+            .attr('y', (s) => vis.bary(s.values.length)-50)
             .attr('height', (s) => vis.barHeight - vis.bary(s.values.length))
             .attr('width', vis.barx.bandwidth())
+            .attr('fill',"rgba(79,183,213,0.47)")
+
+        vis.disp.html(`
+         <div style=" align-content: center; border: thin solid rgba(146,236,255,0.47); margin-left: 5px; margin-top: 5px; width:90%; height:90%; border-radius: 5px; background: rgba(3,117,164,0.47); padding: 10px">
+             <h3>${"On Date: " + vis.clockvis.currentDate}<h3>
+             <h4> ${"At Time: " + vis.t}</h4>   
+             <h5>Total Number Of Calls: ${vis.sum}</h5>
+             <h5>High Activity Places: ${vis.xlist.map((s) => s.key)}</h5>   
+         
+         </div>`)
 
 
 

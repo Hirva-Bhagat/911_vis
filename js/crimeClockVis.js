@@ -106,6 +106,7 @@ class crimeClockVis {
 
 
         vis.myDateSlider = new myDateSlider(vis,'box-3', vis.clockData);
+        vis.currentDate=vis.myDateSlider.grouped[100].key
         vis.myCrimeCharts=new myCrimeCharts(vis,vis.myDateSlider.grouped[100].values);
         vis.updateVis();	//draw them in the correct starting position
 

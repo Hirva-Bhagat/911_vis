@@ -85,6 +85,8 @@ vis.dates=[vis.grouped.map(d=>d.key)]
             d3.select("#sTextbox").property("value",vis.dates[0][this.value]);
             //const tillDate = arrayData.find(item => item.key === "baz");
             console.log(vis.grouped.slice(0,this.value+1))
+            vis.clockvis.currentDate=vis.grouped[this.value].key;
+            console.log(vis.clockvis.currentDate)
             let myCC=vis.clockvis.myCrimeCharts.updateData(vis.clockvis,vis.grouped[this.value].values)
 
         });
