@@ -31,8 +31,9 @@ timeLine.prototype.initVis = function () {
         .attr('class', 'title')
         .append('text')
         .text('Number of all 911 calls by Time')
-        .attr('transform', `translate(120, -10)`)
-        .attr('text-anchor', 'middle');
+        .attr('transform', `translate(120, -15)`)
+        .attr('text-anchor', 'middle')
+        .attr('fill', 'white');
 
     // init scales
     vis.x = d3.scaleTime()

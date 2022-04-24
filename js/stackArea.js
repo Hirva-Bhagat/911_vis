@@ -49,8 +49,9 @@ stackArea.prototype.initVis = function(){
         .attr('class', 'title')
         .append('text')
         .text('Number of Top 10 911 Calls by Time')
-        .attr('transform', `translate(420, -10)`)
-        .attr('text-anchor', 'middle');
+        .attr('transform', `translate(140, -20)`)
+        .attr('text-anchor', 'middle')
+        .attr('fill', 'white');
 
     // Scales and axes
     vis.x = d3.scaleTime()

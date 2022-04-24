@@ -21,12 +21,17 @@ class myDateSlider {
         vis.svg = d3.select("#" + vis.parentElement).append("foreignObject")
             .attr("width", 200)
             .attr("height", 80)
-            .attr("margin-top","-50px")
-            
             .html(function(d) {
                 return '<input id="sTextbox" >\n'
                     +
                     '<input id="slider" type="range" min="0" max="258">'
+            })
+        vis.svg = d3.select("#" + vis.parentElement).append("foreignObject")
+            .attr("width", 500)
+            .attr("height", 80)
+            .html(function(d) {
+                return '<p id="datevalue"></p>\n' +
+                    '<div id="dateslider"></div>'
             })
 
 
