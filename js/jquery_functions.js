@@ -29,18 +29,7 @@ $(document).ready(function() {
 
 
     });
-    $(".timepicker").picktim({
-        mode:'h12',
-        backgroundColor: "#EEE",
-        borderColor: "#DDD",
-        textColor: "#333",
-        symbolColor: "#333",
-        orientation:"bottomLeft",
-        defaultValue:'00:00',
-        appendTo:'#box-3'
 
-
-    });
 });
 
 

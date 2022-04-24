@@ -76,7 +76,7 @@ class barChart {
 
         // Declare bar graph
         vis.bar = vis.svg.append("rect")
-            .attr("class", "bar")
+            .attr("class", "bar_Sungwon")
 
 
         vis.wrangleData();
@@ -132,12 +132,13 @@ class barChart {
             .domain([d3.min(vis.displayData, d=>d.value),
                 d3.max(vis.displayData, d=>d.value)])
 
+        console.log(vis.displayData);
+
         // update the x and y domain
         vis.x.domain([0,d3.max(vis.topTenData, d=>d.value)])
         vis.y.domain(vis.topTenData.map(d=>d.key))
 
         if (this.order){
-
             top_ten_key = vis.topTenData.map(d=>d.key);
             console.log(top_ten_key);
         }
@@ -153,10 +154,10 @@ class barChart {
             .call(vis.yAxis)
             .attr("stroke","white");
 
-        let cases_bar = vis.svg.selectAll(".bar")
+        let cases_bar = vis.svg.selectAll(".bar_Sungwon")
             .data(vis.topTenData);
         cases_bar.enter().append("rect")
-            .attr("class", "bar")
+            .attr("class", "bar_Sungwon")
             .merge(cases_bar)
             .transition()
             .duration(1000)

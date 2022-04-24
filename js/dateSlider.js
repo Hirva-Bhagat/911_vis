@@ -14,24 +14,21 @@ class myDateSlider {
         let vis = this;
 
 
+
+
+
         vis.margin = {top: 50, right: 20, bottom: 40, left: 160};
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
         // drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("foreignObject")
+            .attr("class","dataslider")
             .attr("width", 200)
             .attr("height", 80)
             .html(function(d) {
                 return '<input id="sTextbox" >\n'
                     +
                     '<input id="slider" type="range" min="0" max="258">'
-            })
-        vis.svg = d3.select("#" + vis.parentElement).append("foreignObject")
-            .attr("width", 500)
-            .attr("height", 80)
-            .html(function(d) {
-                return '<p id="datevalue"></p>\n' +
-                    '<div id="dateslider"></div>'
             })
 
 
@@ -88,6 +85,8 @@ vis.dates=[vis.grouped.map(d=>d.key)]
             d3.select("#sTextbox").property("value",vis.dates[0][this.value]);
             //const tillDate = arrayData.find(item => item.key === "baz");
             console.log(vis.grouped.slice(0,this.value+1))
+            vis.clockvis.currentDate=vis.grouped[this.value].key;
+            console.log(vis.clockvis.currentDate)
             let myCC=vis.clockvis.myCrimeCharts.updateData(vis.clockvis,vis.grouped[this.value].values)
 
         });

@@ -70,14 +70,50 @@ class crimeClockVis {
         ];
 
 
+        vis.picktime = d3.select("#" + vis.parentElement).append("foreignObject")
+            .attr("class","timepicker")
+            .attr("width", 250)
+            .attr("height", 80)
+            .html(function(d) {
+                return'<input type="time"\n' +
+                    '               id="timepick"\n' +
+                    '               placeholder="Enter time">\n'
+                    +
+                    '<button type="button"\n' +
+                    '                id="selectedTime">\n' +
+                    '            Enter\n' +
+                    '        </button>'
+            })
+        d3.select("#" + vis.parentElement).append("foreignObject")
+            .attr("class","rstbtn")
+            .attr("width", 30)
+            .attr("height", 30)
+            .html(function(d) {
+                return '<button type="button"\n' +
+                '                id="reset">\n' +
+                '            Reset\n' +
+                '        </button>'
+            })
+        d3.select("#reset").on("click", function() {
+            clearInterval(vis.refreshId)
+            vis.wrangleData()
+        })
+        d3.select("#selectedTime").on("click", function() {
+            vis.reset=true
+            console.log("INTERVAL1")
+            vis.updateTime()
+        })
+
+
         vis.myDateSlider = new myDateSlider(vis,'box-3', vis.clockData);
+        vis.currentDate=vis.myDateSlider.grouped[100].key
         vis.myCrimeCharts=new myCrimeCharts(vis,vis.myDateSlider.grouped[100].values);
         vis.updateVis();	//draw them in the correct starting position
 
         vis.svg = d3.select("#"+vis.parentElement).append("svg")
             .attr('class','clock')
-            .attr("width", "90%")
-            .attr("height", "90%")
+            .attr("width", "100%")
+            .attr("height", "100%")
             .style("display", "block")
             .style("margin","auto");
 
@@ -196,9 +232,11 @@ class crimeClockVis {
 
     wrangleData() {
         let vis=this;
-        setInterval(function(){
+        vis.refreshId=setInterval(function(){
             vis.updateVis();
             vis.moveHands();
+
+
         }, 1000);
 
 
@@ -206,9 +244,16 @@ class crimeClockVis {
 
     }
 
-    updateVis() {
+    updateVis(reset, time) {
         let vis=this;
-        vis.t = new Date();
+        if(reset){
+            vis.t=time
+        }
+        else {
+            vis.t = new Date();
+        }
+
+
         console.log("t:"+vis.t)
         vis.myCrimeCharts.drawCharts(vis)
         vis.handData[0].value = (vis.t.getHours() % 12) + vis.t.getMinutes()/60 ;
@@ -225,6 +270,32 @@ class crimeClockVis {
             .attr('transform',function(d){
                 return 'rotate('+ d.scale(d.value) +')';
             });
+        if(vis.reset){
+            console.log("stopping")
+            vis.reset=false
+            clearInterval(vis.refreshId)
+        }
+    }
+
+    updateTime(){
+        let vis=this;
+        let a =document.getElementById('timepick').value
+        vis.newt = vis.toDate(a,"h:m")
+        console.log(document.getElementById('timepick').value+" "+vis.newt)
+        vis.updateVis(true,vis.newt);
+        vis.moveHands();
+    }
+
+    toDate(dStr,format) {
+        let vis=this;
+        var now = new Date();
+        if (format == "h:m") {
+            now.setHours(dStr.substr(0,dStr.indexOf(":")));
+            now.setMinutes(dStr.substr(dStr.indexOf(":")+1));
+            now.setSeconds(0);
+            return now;
+        }else
+            return "Invalid Format";
     }
 
 

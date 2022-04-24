@@ -36,7 +36,7 @@ function renderBarChart(data) {
 
     bars.enter()
         .append("rect")
-        .attr("class", "bar")
+        .attr("class", "bar_Ayda")
         .attr("fill", "indianred")
         //.transition(t)
         .attr("x", d => dayx(d.Category))
