@@ -26,7 +26,7 @@ class myCrimeCharts {
             .attr("height",document.getElementById("box-2").getBoundingClientRect().height)
             .attr("align","center")
         vis.barSvg = d3.select("#box-4").append("svg")
-            .attr("class","charts callsTT")
+            .attr("class","charts areas")
             .attr("width",vis.barWidth)
             .attr("height",vis.barHeight)
         vis.bSvg = d3.select("#box-5").append("svg")
@@ -38,16 +38,12 @@ class myCrimeCharts {
         vis.linex = d3.scaleLinear()
             .domain([0,24])
             .range([ vis.margin.left, vis.lineWidth ]);
-        vis.lineSvg.append("g")
-            .attr("transform", "translate("+"0"+"," + vis.lineHeight + ")")
-            .call(d3.axisBottom(vis.linex));
+
 
         vis.liney = d3.scaleLinear()
             .domain( [0,vis.data.length])
             .range([ vis.lineHeight-10, 0 ]);
-        vis.lineSvg.append("g")
-            .attr("transform", "translate("+vis.margin.left+", 10)")
-            .call(d3.axisLeft(vis.liney));
+
 
 
         vis.bd= vis.bwidth;
@@ -60,6 +56,20 @@ class myCrimeCharts {
             .style("top", 0)
 
 
+        // set the ranges
+        vis.barx = d3.scaleBand()
+            .range([0, vis.barWidth])
+            .padding(0.1);
+        vis.bary = d3.scaleLinear()
+            .range([vis.barHeight-70, 0]);
+
+// append the svg object to the body of the page
+// append a 'group' element to 'svg'
+// moves the 'group' element to the top left margin
+        vis.barSvg=vis.barSvg
+            .append("g")
+            .attr("transform",
+                "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
         console.log(vis.clockvis.t)
         vis.updateData(vis.clockvis,vis.data)
@@ -81,8 +91,18 @@ class myCrimeCharts {
             .key(function(d){ return d.Time_of_call.toLocaleTimeString('it-IT').split(":")[0]; }).entries(vis.data);
         vis.address=d3.nest()
             .key(function(d){ return d.twp })
-            .key(function (d){ return d.addr}).entries(vis.data);
+            .entries(vis.data);
+        vis.places=d3.nest()
+            .key(function (d){ return d.addr})
+            .entries(vis.data)
+        vis.addbyplaces=d3.nest()
+            .key(function(d){ return d.twp })
+            .key(function (d){return d.addr})
+            .entries(vis.data);
+        console.log("ADDDRESS")
         console.log(vis.address)
+        console.log(vis.places)
+        console.log(vis.addbyplaces)
         vis.addList = {
             children: []
         };
@@ -150,6 +170,17 @@ class myCrimeCharts {
     }
     updateVis(){
         let vis=this
+        vis.lineSvg.selectAll("*").remove();
+        vis.bSvg.selectAll("*").remove();
+        vis.barSvg.selectAll("*").remove();
+        vis.lineSvg.append("g")
+            .attr("transform", "translate("+"0"+"," + vis.lineHeight + ")")
+            .call(d3.axisBottom(vis.linex));
+
+        vis.lineSvg.append("g")
+            .attr("transform", "translate("+vis.margin.left+", 10)")
+            .call(d3.axisLeft(vis.liney));
+
         vis.linechart = vis.lineSvg
             .append('g')
             .append("path")
@@ -165,7 +196,7 @@ class myCrimeCharts {
 
         var bubble = d3.pack(vis.addList)
             .size([vis.bwidth, vis.bwidth])
-            .padding(1.5);
+            .padding(0.5);
         var color = d3.scaleOrdinal(d3.schemeCategory10)
 
 
@@ -199,6 +230,7 @@ class myCrimeCharts {
                 return d.twp + ": " + d.count;
             });
 
+        vis.selected_place=null
         node.append("circle")
             .attr("r", function(d) {
                 return d.r;
@@ -209,6 +241,7 @@ class myCrimeCharts {
             d3.select(this)
                 .attr('stroke-width', '2px')
                 .attr('stroke', 'black')
+            vis.selected_place=d.data.twp
             vis.tooltip
                 .style("opacity", 1)
                 .style("left", event.pageX + 20 + "px")
@@ -229,6 +262,7 @@ class myCrimeCharts {
                     .style("top", 0)
                     .html(``);
             });
+
 
         node.append("text")
             .attr("dy", ".2em")
@@ -256,6 +290,42 @@ class myCrimeCharts {
 
         d3.select(self.frameElement)
             .style("height", vis.bd + "px");
+
+        function sortByDesc(a, b) {
+            return b.values.length-a.values.length;
+        }
+        vis.sortedData = vis.places.sort(sortByDesc);
+
+        //console.log(vis.sortedData)
+        //console.log(vis.selected_place)
+        //vis.add = vis.addbyplaces.findIndex(item => item.key === vis.selected_place);
+        //console.log(vis.add)
+        vis.xlist=vis.sortedData.slice(0,3)
+        console.log(vis.xlist.map((s)=>s.key))
+        vis.barx.domain(vis.xlist.map((s)=>s.key))
+        vis.bary.domain([0, 80])
+        vis.barSvg.append('g')
+            .call(d3.axisLeft(vis.bary));
+        console.log(vis.places.map((s)=>s.key))
+        vis.barSvg.append('g')
+            .attr('transform', `translate(0, ${vis.barHeight-70})`)
+            .call(d3.axisBottom(vis.barx))
+            .selectAll("text")
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", "rotate(-10)");;
+
+        vis.barSvg.selectAll()
+            .data(vis.xlist)
+            .enter()
+            .append('rect')
+            .attr('x', (s) => vis.barx(s.key))
+            .attr('y', (s) => vis.bary(s.values.length)-70)
+            .attr('height', (s) => vis.barHeight - vis.bary(s.values.length))
+            .attr('width', vis.barx.bandwidth())
+
+
 
 
     }

@@ -90,6 +90,7 @@ class crimeClockVis {
                     '        </button>'
             })
         d3.select("#reset").on("click", function() {
+            clearInterval(vis.refreshId)
             vis.wrangleData()
         })
         d3.select("#selectedTime").on("click", function() {
@@ -264,6 +265,7 @@ class crimeClockVis {
                 return 'rotate('+ d.scale(d.value) +')';
             });
         if(vis.reset){
+            console.log("stopping")
             vis.reset=false
             clearInterval(vis.refreshId)
         }
