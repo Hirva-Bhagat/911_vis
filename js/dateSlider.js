@@ -81,7 +81,7 @@ vis.dates=[vis.grouped.map(d=>d.key)]
 
         const formatTime = d3.timeFormat("%B %d, %Y");
         d3.select("#slider").on("input", function() {
-            console.log(vis.dates[0][this.value])
+            //console.log(vis.dates[0][this.value])
             d3.select("#sTextbox").attr("value",vis.dates[0][this.value]);
         });
         //gSimple.call(sliderSimple);

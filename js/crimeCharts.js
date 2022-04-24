@@ -1,9 +1,9 @@
 class myCrimeCharts {
 
     // constructor method to initialize Timeline object
-    constructor(data) {
+    constructor(clockvis,data) {
         this.data=data
-
+        this.clockvis=clockvis
         // call initVis method
         this.initVis()
     }
@@ -34,6 +34,10 @@ class myCrimeCharts {
             .attr("height",vis.pieHeight)
 
         //line chart
+        d3.select("#sTextbox").on("change", change);
+        function change(){
+            console.log(this.attr("value"))
+        }
         vis.day="2015-12-10"
         vis.t = new Date();
         vis.hvalue = (vis.t.getHours() % 12);

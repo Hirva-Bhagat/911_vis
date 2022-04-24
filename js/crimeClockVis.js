@@ -82,8 +82,8 @@ class crimeClockVis {
 
 
 
-        myDateSlider = new myDateSlider('box-3', vis.clockData);
-        myCrimeCharts=new myCrimeCharts(vis.clockData);
+        vis.myDateSlider = new myDateSlider('box-3', vis.clockData);
+        myCrimeCharts=new myCrimeCharts(vis,vis.clockData);
 
 
         vis.face = vis.svg.append('g')
