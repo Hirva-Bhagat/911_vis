@@ -106,9 +106,6 @@ fill: rgba(10, 117, 140, 0.47);
 .hour-label{
     font-size: 24px;
 }
-
-<<<<<<< HEAD
-=======
 .d3-tip {
     padding: 12px;
     background: rgba(0, 0, 0, 0.8);
@@ -148,8 +145,8 @@ div.tooltip {
 }
 
 p.tooltip {
-    font-size: 18;
-    font-weight: 1em;
+    font-size: 18px;
+    font-weight: 1;
     padding-left: 10px;
 }
 
@@ -159,11 +156,8 @@ p.tooltip {
     font: 12px sans-serif;
     pointer-events: none;
 }
-<<<<<<< HEAD
->>>>>>> d0e79a04441d86712591256b80a5512e70e29a3e
-=======
 
 .tooltip_stack{
     font-size: 13px;
 }
->>>>>>> c11425c7392131323d2e30ee303098f888e2ab28
+

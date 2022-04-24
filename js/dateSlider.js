@@ -1,7 +1,8 @@
 class myDateSlider {
 
     // constructor method to initialize Timeline object
-    constructor(parentElement,data) {
+    constructor(clockvis,parentElement,data) {
+        this.clockvis=clockvis
         this.parentElement = parentElement;
         this.data=data
 
@@ -79,10 +80,16 @@ vis.dates=[vis.grouped.map(d=>d.key)]
         console.log(vis.dates)
 
 
+
         const formatTime = d3.timeFormat("%B %d, %Y");
         d3.select("#slider").on("input", function() {
             //console.log(vis.dates[0][this.value])
-            d3.select("#sTextbox").attr("value",vis.dates[0][this.value]);
+            //d3.select("#sTextbox").dispatch('click');
+            d3.select("#sTextbox").property("value",vis.dates[0][this.value]);
+            //const tillDate = arrayData.find(item => item.key === "baz");
+            console.log(vis.grouped.slice(0,this.value+1))
+            let myCC=vis.clockvis.myCrimeCharts.updateData(vis.clockvis,vis.grouped[this.value].values)
+
         });
         //gSimple.call(sliderSimple);
 

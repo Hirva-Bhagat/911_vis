@@ -70,6 +70,8 @@ class crimeClockVis {
         ];
 
 
+        vis.myDateSlider = new myDateSlider(vis,'box-3', vis.clockData);
+        vis.myCrimeCharts=new myCrimeCharts(vis,vis.myDateSlider.grouped[100].values);
         vis.updateVis();	//draw them in the correct starting position
 
         vis.svg = d3.select("#"+vis.parentElement).append("svg")
@@ -80,19 +82,13 @@ class crimeClockVis {
             .style("margin","auto");
 
 
-
-
-        vis.myDateSlider = new myDateSlider('box-3', vis.clockData);
-        myCrimeCharts=new myCrimeCharts(vis,vis.clockData);
-
-
         vis.face = vis.svg.append('g')
             .attr('id','clock-face')
             .attr('transform','translate(' + (vis.clockRadius + vis.margin) + ',' + (vis.clockRadius + vis.margin) + ')');
 
-        vis.tooltip = d3.select("#clockSlide").append('div')
-            .attr('class', "tooltip")
-            .attr('id', 'tickTooltip')
+        //vis.tooltip = d3.select("#clockSlide").append('div')
+        //    .attr('class', "tooltip")
+        //    .attr('id', 'tickTooltip')
 
         //add marks for seconds
         vis.face.selectAll('.second-tick')
@@ -114,22 +110,8 @@ class crimeClockVis {
                 .style('color', 'rgba(173,222,255,0.65)')
 
 
-
-
-
         })
-            .on('mouseout', function(event, d){
-                d3.select(this)
-                    .style('stroke-width', '1px')
-                    .style('color',"black")
 
-
-                vis.tooltip
-                    .style("opacity", 0)
-                    .style("left", 0)
-                    .style("top", 0)
-                    .html(``);
-            });
         //and labels
 
         vis.face.selectAll('.second-label')
@@ -226,12 +208,13 @@ class crimeClockVis {
 
     updateVis() {
         let vis=this;
-
-        console.log("here")
         vis.t = new Date();
+        console.log("t:"+vis.t)
+        vis.myCrimeCharts.drawCharts(vis)
         vis.handData[0].value = (vis.t.getHours() % 12) + vis.t.getMinutes()/60 ;
         vis.handData[1].value = vis.t.getMinutes();
         vis.handData[2].value = vis.t.getSeconds();
+        //vis.totalTime=vis.t.getHours()*3.6e3 + vis.t.getMinutes()*60 + vis.t.getSeconds()*1
 
     }
     moveHands(){
