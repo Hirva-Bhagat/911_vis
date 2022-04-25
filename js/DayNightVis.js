@@ -28,7 +28,7 @@ function renderBarChart(data) {
     dayy.domain([0, d3.max(data, d => d.Count)]);
 
     // ---- DRAW BARS ----
-    let bars = daysvg.selectAll(".bar")
+    let bars = daysvg.selectAll(".bar_Ayda")
         .remove()
         .exit()
         .data(data)
