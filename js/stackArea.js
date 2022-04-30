@@ -49,7 +49,7 @@ stackArea.prototype.initVis = function(){
         .attr('class', 'title')
         .append('text')
         .text('Number of Top 10 911 Calls by Time')
-        .attr('transform', `translate(140, -20)`)
+        .attr('transform', `translate(350, -20)`)
         .attr('text-anchor', 'middle')
         .attr('fill', 'white');
 
@@ -140,6 +140,17 @@ stackArea.prototype.initVis = function(){
         .attr("class", "tooltip_stack")
         .attr("x",30)
         .attr("y",108);
+
+    vis.svg.append("text")
+        .attr("x", -50)
+        .attr("y", -15)
+        .attr('fill', 'white')
+        .text("Number of Calls");
+    vis.svg.append("text")
+        .attr("x", vis.width - 5)
+        .attr("y", vis.height + 25)
+        .attr('fill', 'white')
+        .text("Time");
 
 
     // (Filter, aggregate, modify data)

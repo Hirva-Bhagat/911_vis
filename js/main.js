@@ -42,6 +42,8 @@ let daysvg = d3.select("#DayNightVis").append("svg")
     .append("g")
     .attr("transform", "translate(" + daymargin.left + "," + daymargin.top + ")");
 
+
+
 let dayxAxisGroup = daysvg.append("g")
     .attr("class", "x-axis axis");
 

@@ -34,6 +34,7 @@ function renderBarChart(data) {
         .data(data)
 
 
+
     bars.enter()
         .append("rect")
         .attr("class", "bar_Ayda")
@@ -42,7 +43,9 @@ function renderBarChart(data) {
         .attr("x", d => dayx(d.Category))
         .attr("y", d => dayy(d.Count))
         .attr("height", d => (dayheight - dayy(d.Count)))
-        .attr("width", dayx.bandwidth())
+        .attr("width", dayx.bandwidth());
+
+
 
 
     // ---- DRAW AXIS	----
@@ -61,7 +64,32 @@ function renderBarChart(data) {
         .call(dayyAxis);
 
 
-    //svg.select("text.axis-title").remove();
+    let texts = daysvg.selectAll(".texts")
+        .remove()
+        .exit()
+        .data(data)
+
+    texts.enter()
+        //.data(data)
+        //.enter()
+        .append('text')
+        //.attr("class", "axisText")
+        .attr("class", "texts")
+        //  .classed('text.bars', true)
+        .attr("fill","white")
+        .transition()
+        .duration(500)
+        .style("text-anchor", "middle")
+        .style("font-size", "11px")
+        .attr('x', d => dayx(d.Category) + dayx.bandwidth()/2)
+        .attr('dx', 0)
+        .attr('y', d => dayy(d.Count))
+        .attr('dy', -6)
+        .text(d => d.Count);
+
+
+    //daysvg.selectAll('.text.bar').remove();
+
     daysvg.append("text")
         .attr("class", "axis-title")
         .attr("fill","white")

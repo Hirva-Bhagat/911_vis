@@ -78,6 +78,12 @@ class barChart {
         vis.bar = vis.svg.append("rect")
             .attr("class", "bar_Sungwon")
 
+        vis.svg.append("text")
+            .attr("x", -155)
+            .attr("y", vis.height + 20)
+            .attr('fill', 'white')
+            .text("Number of Calls");
+
 
         vis.wrangleData();
     }

@@ -31,7 +31,7 @@ timeLine.prototype.initVis = function () {
         .attr('class', 'title')
         .append('text')
         .text('Number of all 911 calls by Time')
-        .attr('transform', `translate(120, -15)`)
+        .attr('transform', `translate(350, -15)`)
         .attr('text-anchor', 'middle')
         .attr('fill', 'white');
 
@@ -69,6 +69,16 @@ timeLine.prototype.initVis = function () {
     vis.timePath = vis.svg.append("path")
         .attr("class", "area area-time");
 
+    vis.svg.append("text")
+        .attr("x", -50)
+        .attr("y", -15)
+        .attr('fill', 'white')
+        .text("Number of Calls");
+    vis.svg.append("text")
+        .attr("x", vis.width - 5)
+        .attr("y", vis.height + 25)
+        .attr('fill', 'white')
+        .text("Time");
 
 
     // init basic data processing
