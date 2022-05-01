@@ -107,6 +107,7 @@ class crimeClockVis {
 
 
 
+
         vis.myDateSlider = new myDateSlider(vis,'box-3', vis.clockData);
         vis.currentDate=vis.myDateSlider.grouped[100].key
         vis.myCrimeCharts=new myCrimeCharts(vis,vis.myDateSlider.grouped[100].values);
@@ -140,13 +141,67 @@ class crimeClockVis {
             .attr("fill" , "black")
             .attr("text-anchor", "middle");
 
+        vis.svg.append("foreignObject")
+            .attr("class","help")
+            .attr("width", 50)
+            .attr("height", 30)
+            .attr("x","530")
+            .attr("y","520")
+            .html(function(d) {
+                return '<button type="button"\n' +
+                    'onclick="showhelp"\n'+
+                    '                id="help">\n' +
+                    '            Help\n' +
+                    '        </button>'
+            });
+        d3.select("#help").on("mouseover", function() {
+            showhelp()
+        })
+        d3.select("#help").on("mouseout", function() {
+            closehelp()
+        })
+        vis.tooltip = vis.svg.append('div')
+            .attr('class', "tooltip")
+            .attr('id', 'tickTooltip')
+            .style("opacity", 0)
+            .style("left", 0)
+            .style("top", 0)
+            .html(``);
+        function showhelp(){
+
+            vis.tooltip
+                .style("opacity", 1)
+                .style("left", event.pageX - 20 + "px")
+                .style("top", event.pageY -200+ "px")
+                .html('<div><div style="align-content: center; padding: 20px;"><p>The defualt date is shown in the summariser (blue block in the middle). However, you can pick any day from the' +
+                ' silder above</p>' +
+                '<p>The line graph will show the count by the nearest hour. You can see how the graph changes by either selecting a specific time or hovering over the hour labels</p>' +
+                '<p>Observe how the other two graphs change by the date</p><p>' +
+                    'enjoy!</p></div>' +
+                '</div>');
+        }
+        function closehelp(){
+
+            vis.tooltip
+                .style("opacity", 0)
+                .style("left", 0)
+                .style("top", 0)
+                .html(``);
+        }
+
+
+
+
+
+
         vis.face = vis.svg.append('g')
             .attr('id','clock-face')
-            .attr('transform','translate(' + (vis.clockRadius + vis.margin) + ',' + (vis.clockRadius + vis.margin) + ')');
+            .attr('transform','translate(' + (vis.clockRadius + vis.margin) + ',' + (vis.clockRadius + vis.margin) + ')')
 
-        //vis.tooltip = d3.select("#clockSlide").append('div')
-        //    .attr('class', "tooltip")
-        //    .attr('id', 'tickTooltip')
+
+        vis.tooltip = d3.select("#clockSlide").append('div')
+            .attr('class', "tooltip")
+            .attr('id', 'tickTooltip')
 
         //add marks for seconds
         vis.face.selectAll('.second-tick')
@@ -159,17 +214,7 @@ class crimeClockVis {
             .attr('y2',vis.secondTickStart + vis.secondTickLength)
             .attr('transform',function(d){
                 return 'rotate(' + vis.secondScale(d) + ')';
-            }).on('mouseover', function(event, d){
-            console.log("here")
-            d3.select(this)
-                .attr('y1',vis.clockRadius)
-                .style('stroke-width', '6px')
-                .style("opacity","0.8")
-                .style('color', 'rgba(173,222,255,0.65)')
-
-
-        })
-
+            })
         //and labels
 
         vis.face.selectAll('.second-label')

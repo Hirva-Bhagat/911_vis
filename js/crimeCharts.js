@@ -43,7 +43,7 @@ class myCrimeCharts {
 
 
         vis.liney = d3.scaleLinear()
-            .domain( [0,vis.data.length])
+            .domain( [0,100])
             .range([ vis.lineHeight-10, 0 ]);
 
 
@@ -95,8 +95,10 @@ class myCrimeCharts {
         vis.timesList=[vis.times.map(d=>d.key)]
         vis.hourList=d3.nest()
             .key(function(d){ return d.Time_of_call.toLocaleTimeString('it-IT').split(":")[0]; }).entries(vis.data);
+
         vis.address=d3.nest()
-            .key(function(d){ return d.twp })
+            .key(function(d){
+                return d.twp})
             .entries(vis.data);
         vis.places=d3.nest()
             .key(function (d){ return d.addr})
@@ -123,6 +125,7 @@ class myCrimeCharts {
             });
         }
         console.log(vis.addList)
+
         //vis.drawCharts(vis.clockvis)
 
     }
@@ -172,6 +175,10 @@ class myCrimeCharts {
 
         vis.sum=d3.sum(vis.lineData, x => x.values.length)
         console.log(vis.lineData);
+
+
+
+
         vis.updateVis()
 
     }
@@ -210,7 +217,7 @@ class myCrimeCharts {
     vis.bSvg.append("text")
         .attr("x", vis.bheight-90)
             .attr("y", vis.bwidth-15)
-            .text("No. of calls by cities till "+vis.t)
+            .text("No. of calls by cities on "+vis.clockvis.currentDate)
             .attr("class","labels")
             .attr("font-family" , "sans-serif")
             .attr("font-size" , "10px")
@@ -286,129 +293,134 @@ class myCrimeCharts {
             });
 
         vis.selected_place=null
-        node.append("circle")
-            .attr("r", function(d) {
-                return d.r;
-            })
-            .style("fill", function(d,i) {
-                return color(i);
-            }).on("mouseover", function(event, d){
-            d3.select(this)
-                .attr('stroke-width', '2px')
-                .attr('stroke', 'black')
-            vis.selected_place=d.data.twp
-            vis.tooltip
-                .style("opacity", 1)
-                .style("left", event.pageX + 20 + "px")
-                .style("top", event.pageY + "px")
-                .html(`
+        if(vis.lineData.length!=0)
+        {
+            node.append("circle")
+                .attr("r", function(d) {
+                    return d.r;
+                })
+                .style("fill", function(d,i) {
+                    return color(i);
+                }).on("mouseover", function(event, d){
+                d3.select(this)
+                    .attr('stroke-width', '2px')
+                    .attr('stroke', 'black')
+                vis.selected_place=d.data.twp
+                vis.tooltip
+                    .style("opacity", 1)
+                    .style("left", event.pageX + 20 + "px")
+                    .style("top", event.pageY + "px")
+                    .html(`
          <div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 20px">
              <h3>${"place: "+d.data.twp}<h3>
              <h4> Count: ${d.data.count}</h4>                           
          </div>`);
-        })
-            .on("mouseout",function(event, d){
-                d3.select(this)
-                    .attr('stroke-width', '0px')
-
-                vis.tooltip
-                    .style("opacity", 0)
-                    .style("left", 0)
-                    .style("top", 0)
-                    .html(``);
-            });
-
-
-        node.append("text")
-            .attr("dy", ".2em")
-            .style("text-anchor", "middle")
-            .text(function(d) {
-                return d.data.twp.substring(0, d.r / 3);
             })
-            .attr("font-family", "sans-serif")
-            .attr("font-size", function(d){
-                return d.r/5;
-            })
-            .attr("fill", "white");
+                .on("mouseout",function(event, d){
+                    d3.select(this)
+                        .attr('stroke-width', '0px')
 
-        node.append("text")
-            .attr("dy", "1.3em")
-            .style("text-anchor", "middle")
-            .text(function(d) {
-                return d.data.count;
-            })
-            .attr("font-family",  "Gill Sans", "Gill Sans MT")
-            .attr("font-size", function(d){
-                return d.r/5;
-            })
-            .attr("fill", "white");
+                    vis.tooltip
+                        .style("opacity", 0)
+                        .style("left", 0)
+                        .style("top", 0)
+                        .html(``);
+                });
 
-        d3.select(self.frameElement)
-            .style("height", vis.bd + "px");
 
-        function sortByDesc(a, b) {
-            return b.values.length-a.values.length;
+            node.append("text")
+                .attr("dy", ".2em")
+                .style("text-anchor", "middle")
+                .text(function(d) {
+                    return d.data.twp.substring(0, d.r / 3);
+                })
+                .attr("font-family", "sans-serif")
+                .attr("font-size", function(d){
+                    return d.r/5;
+                })
+                .attr("fill", "white");
+
+            node.append("text")
+                .attr("dy", "1.3em")
+                .style("text-anchor", "middle")
+                .text(function(d) {
+                    return d.data.count;
+                })
+                .attr("font-family",  "Gill Sans", "Gill Sans MT")
+                .attr("font-size", function(d){
+                    return d.r/5;
+                })
+                .attr("fill", "white");
+
+            d3.select(self.frameElement)
+                .style("height", vis.bd + "px");
+
+            function sortByDesc(a, b) {
+                return b.values.length-a.values.length;
+            }
+            vis.sortedData = vis.places.sort(sortByDesc);
+
+            //console.log(vis.sortedData)
+            //console.log(vis.selected_place)
+            //vis.add = vis.addbyplaces.findIndex(item => item.key === vis.selected_place);
+            //console.log(vis.add)
+            vis.xlist=vis.sortedData.slice(0,3)
+            console.log(vis.sortedData)
+            vis.barx.domain(vis.xlist.map((s)=>s.key))
+            vis.bary.domain([0, 20])
+            vis.barSvg.append('g')
+                .call(d3.axisLeft(vis.bary)
+                );
+            //console.log(vis.places.map((s)=>s.key))
+            vis.barSvg.append('g')
+                .attr('transform', `translate(0, ${vis.barHeight-50})`)
+                .call(d3.axisBottom(vis.barx))
+                .selectAll("text") // select all the x tick texts
+                .call(function(t){
+                    t.each(function(d){ // for each one
+                        var self = d3.select(this);
+                        var s = self.text().split('&');  // get the text and split it
+                        self.text(''); // clear it out
+                        self.append("tspan") // insert two tspans
+                            .attr("x", "0")
+                            .attr("dy",".8em")
+                            .text(s[0]+" & ")
+                            .attr("padding","12px");
+                        self.append("tspan")
+                            .attr("x", "0")
+                            .attr("dy","0.8em")
+                            .text(s[1]);
+                    })})
+                .attr("transform", "rotate(7)");
+
+
+            vis.barSvg.selectAll()
+                .data(vis.xlist)
+                .enter()
+                .append('rect')
+                .attr('x', (s) => vis.barx(s.key))
+                .attr('y', (s) => vis.bary(s.values.length))
+                .attr('height', (s) => vis.barHeight -50 - vis.bary(s.values.length))
+                .attr('width', vis.barx.bandwidth()-10)
+                .attr('fill',"rgba(79,183,213,0.47)")
+
+            vis.barSvg
+                .selectAll()
+                .data(vis.xlist)
+                .enter()
+                .append('text')
+                .attr("class", "texts")
+                .attr("fill","darkblue")
+                .style("text-anchor", "middle")
+                .style("font-size", "11px")
+                .attr('x', d => vis.barx(d.key) + vis.barx.bandwidth()/2)
+                .attr('dx', 0)
+                .attr('y', d => vis.bary(d.values.length))
+                .attr('dy', -6)
+                .text(d => d.values.length);
         }
-        vis.sortedData = vis.places.sort(sortByDesc);
-
-        //console.log(vis.sortedData)
-        //console.log(vis.selected_place)
-        //vis.add = vis.addbyplaces.findIndex(item => item.key === vis.selected_place);
-        //console.log(vis.add)
-        vis.xlist=vis.sortedData.slice(0,3)
-        console.log(vis.sortedData)
-        vis.barx.domain(vis.xlist.map((s)=>s.key))
-        vis.bary.domain([0, 20])
-        vis.barSvg.append('g')
-            .call(d3.axisLeft(vis.bary)
-            );
-        //console.log(vis.places.map((s)=>s.key))
-        vis.barSvg.append('g')
-            .attr('transform', `translate(0, ${vis.barHeight-50})`)
-            .call(d3.axisBottom(vis.barx))
-            .selectAll("text") // select all the x tick texts
-            .call(function(t){
-                t.each(function(d){ // for each one
-                    var self = d3.select(this);
-                    var s = self.text().split('&');  // get the text and split it
-                    self.text(''); // clear it out
-                    self.append("tspan") // insert two tspans
-                        .attr("x", "0")
-                        .attr("dy",".8em")
-                        .text(s[0]+" & ")
-                        .attr("padding","12px");
-                    self.append("tspan")
-                        .attr("x", "0")
-                        .attr("dy","0.8em")
-                        .text(s[1]);
-                })})
-            .attr("transform", "rotate(7)");
 
 
-        vis.barSvg.selectAll()
-            .data(vis.xlist)
-            .enter()
-            .append('rect')
-            .attr('x', (s) => vis.barx(s.key))
-            .attr('y', (s) => vis.bary(s.values.length))
-            .attr('height', (s) => vis.barHeight -50 - vis.bary(s.values.length))
-            .attr('width', vis.barx.bandwidth()-10)
-            .attr('fill',"rgba(79,183,213,0.47)")
-
-        vis.barSvg
-            .selectAll()
-            .data(vis.xlist)
-            .enter()
-            .append('text')
-            .attr("class", "texts")
-            .attr("fill","darkblue")
-            .style("text-anchor", "middle")
-            .style("font-size", "11px")
-            .attr('x', d => vis.barx(d.key) + vis.barx.bandwidth()/2)
-            .attr('dx', 0)
-            .attr('y', d => vis.bary(d.values.length))
-            .attr('dy', -6)
-            .text(d => d.values.length);
 
 
         vis.disp.html(`
