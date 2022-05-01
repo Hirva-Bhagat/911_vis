@@ -70,6 +70,7 @@ class crimeClockVis {
         ];
 
 
+
         vis.picktime = d3.select("#" + vis.parentElement).append("foreignObject")
             .attr("class","timepicker")
             .attr("width", 250)
@@ -118,6 +119,26 @@ class crimeClockVis {
             .style("display", "block")
             .style("margin","auto");
 
+
+        vis.svg.append("text")
+            .text("Pick a Date")
+            .attr("class","labels")
+            .attr("x", 520)
+            .attr("y", 20)
+            .attr("font-family" , "sans-serif")
+            .attr("font-size" , "14px")
+            .attr("fill" , "black")
+            .attr("text-anchor", "middle");
+
+        vis.svg.append("text")
+            .text("Select Time")
+            .attr("class","labels")
+            .attr("x", 50)
+            .attr("y", 20)
+            .attr("font-family" , "sans-serif")
+            .attr("font-size" , "14px")
+            .attr("fill" , "black")
+            .attr("text-anchor", "middle");
 
         vis.face = vis.svg.append('g')
             .attr('id','clock-face')

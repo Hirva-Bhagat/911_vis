@@ -195,6 +195,7 @@ class myCrimeCharts {
             .attr("font-size" , "10px")
             .attr("fill" , "black")
             .attr("text-anchor", "middle");
+
         vis.lineSvg.append("g").append("text")
             .text("No of calls")
             .attr("class","labels")
@@ -381,8 +382,7 @@ class myCrimeCharts {
                         .attr("dy","0.8em")
                         .text(s[1]);
                 })})
-            .attr("transform", "rotate(7)");;
-
+            .attr("transform", "rotate(7)");
 
 
         vis.barSvg.selectAll()
