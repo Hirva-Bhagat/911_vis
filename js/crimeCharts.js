@@ -60,10 +60,11 @@ class myCrimeCharts {
 
         // set the ranges
         vis.barx = d3.scaleBand()
-            .range([0, vis.barWidth])
-            .padding(0.1);
+            .range([0, vis.barWidth-20])
+            .padding(0.1)
+        ;
         vis.bary = d3.scaleLinear()
-            .range([vis.barHeight-40, 0]);
+            .range([vis.barHeight-50, 0]);
 
 // append the svg object to the body of the page
 // append a 'group' element to 'svg'
@@ -71,7 +72,8 @@ class myCrimeCharts {
         vis.barSvg=vis.barSvg
             .append("g")
             .attr("transform",
-                "translate(" + vis.margin.left + "," + vis.margin.top + ")");
+                "translate(" + vis.margin.left + "," + vis.margin.top + ")")
+        ;
 
 
 
@@ -353,30 +355,61 @@ class myCrimeCharts {
         //vis.add = vis.addbyplaces.findIndex(item => item.key === vis.selected_place);
         //console.log(vis.add)
         vis.xlist=vis.sortedData.slice(0,3)
-        //console.log(vis.xlist.map((s)=>s.key))
+        console.log(vis.sortedData)
         vis.barx.domain(vis.xlist.map((s)=>s.key))
-        vis.bary.domain([0, 80])
+        vis.bary.domain([0, 20])
         vis.barSvg.append('g')
-            .call(d3.axisLeft(vis.bary));
+            .call(d3.axisLeft(vis.bary)
+            );
         //console.log(vis.places.map((s)=>s.key))
         vis.barSvg.append('g')
-            .attr('transform', `translate(0, ${vis.barHeight-40})`)
+            .attr('transform', `translate(0, ${vis.barHeight-50})`)
             .call(d3.axisBottom(vis.barx))
-            .selectAll("text")
-            .style("text-anchor", "end")
-            .attr("dx", "-.8em")
-            .attr("dy", ".15em")
-            .attr("transform", "rotate(-7)");
+            .selectAll("text") // select all the x tick texts
+            .call(function(t){
+                t.each(function(d){ // for each one
+                    var self = d3.select(this);
+                    var s = self.text().split('&');  // get the text and split it
+                    self.text(''); // clear it out
+                    self.append("tspan") // insert two tspans
+                        .attr("x", "0")
+                        .attr("dy",".8em")
+                        .text(s[0]+" & ")
+                        .attr("padding","12px");
+                    self.append("tspan")
+                        .attr("x", "0")
+                        .attr("dy","0.8em")
+                        .text(s[1]);
+                })})
+            .attr("transform", "rotate(7)");;
+
+
 
         vis.barSvg.selectAll()
             .data(vis.xlist)
             .enter()
             .append('rect')
             .attr('x', (s) => vis.barx(s.key))
-            .attr('y', (s) => vis.bary(s.values.length)-50)
-            .attr('height', (s) => vis.barHeight - vis.bary(s.values.length))
-            .attr('width', vis.barx.bandwidth())
+            .attr('y', (s) => vis.bary(s.values.length))
+            .attr('height', (s) => vis.barHeight -50 - vis.bary(s.values.length))
+            .attr('width', vis.barx.bandwidth()-10)
             .attr('fill',"rgba(79,183,213,0.47)")
+
+        vis.barSvg
+            .selectAll()
+            .data(vis.xlist)
+            .enter()
+            .append('text')
+            .attr("class", "texts")
+            .attr("fill","darkblue")
+            .style("text-anchor", "middle")
+            .style("font-size", "11px")
+            .attr('x', d => vis.barx(d.key) + vis.barx.bandwidth()/2)
+            .attr('dx', 0)
+            .attr('y', d => vis.bary(d.values.length))
+            .attr('dy', -6)
+            .text(d => d.values.length);
+
 
         vis.disp.html(`
          <div style=" align-content: center; border: thin solid rgba(146,236,255,0.47); margin-left: 5px; margin-top: 5px; width:90%; height:90%; border-radius: 5px; background: rgba(3,117,164,0.47); padding: 10px">

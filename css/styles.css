@@ -122,9 +122,22 @@ fill: rgba(10, 117, 140, 0.47);
 .second-label{
     font-size: 12px;
 }
-
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
 .hour-label{
     font-size: 24px;
+    color: cadetblue;
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
 .d3-tip {
     padding: 12px;
@@ -168,6 +181,10 @@ p.tooltip {
     font-size: 18px;
     font-weight: 1;
     padding-left: 10px;
+}
+.circs{
+    fill: cadetblue;
+    opacity: 0.7;
 }
 
 .axis-title {

@@ -105,6 +105,7 @@ class crimeClockVis {
         })
 
 
+
         vis.myDateSlider = new myDateSlider(vis,'box-3', vis.clockData);
         vis.currentDate=vis.myDateSlider.grouped[100].key
         vis.myCrimeCharts=new myCrimeCharts(vis,vis.myDateSlider.grouped[100].values);
@@ -179,8 +180,9 @@ class crimeClockVis {
                 return 'rotate(' + vis.hourScale(d) + ')';
             });
 
+
         vis.face.selectAll('.hour-label')
-            .data(d3.range(3,13,3))
+            .data(d3.range(1,13,1))
             .enter()
             .append('text')
             .attr('class', 'hour-label')
@@ -193,7 +195,48 @@ class crimeClockVis {
             })
             .text(function(d){
                 return d;
+            })
+
+        vis.face.selectAll('.circs')
+            .data(d3.range(1,13,1))
+            .enter()
+            .append('circle').attr('class','circs')
+            .attr('text-anchor','middle')
+            .attr('cx',function(d){
+                return vis.hourLabelRadius*Math.sin(vis.hourScale(d)*vis.radians);
+            })
+            .attr('cy',function(d){
+                return -vis.hourLabelRadius*Math.cos(vis.hourScale(d)*vis.radians) + vis.hourLabelYOffset -7;
+            })
+            .attr('r',function(d){
+                return vis.clockRadius/10;
+            })
+            .attr("id",function (d){
+                return d;
+            })
+            .on('mouseover', function(event, d){
+            d3.select(this)
+                .attr('stroke-width', '2px')
+                .attr('stroke', 'darkblue')
+                .attr('fill', 'paleturquoise')
+
+                console.log(event.target.id)
+                //console.log("SEL:"+event)
+                vis.selected = vis.toDate(event.target.id+":00","h:m")
+                vis.hover=true
+
+
+
+        })
+            .on('mouseout', function(event, d){
+                d3.select(this)
+                    .attr('stroke-width', '1px')
+                    .attr('fill', 'cadetblue')
+                vis.hover=false
+
             });
+
+
 
 
         vis.hands = vis.face.append('g').attr('id','clock-hands');
@@ -250,8 +293,14 @@ class crimeClockVis {
             vis.t=time
         }
         else {
-            vis.t = new Date();
-        }
+            if(vis.hover){
+                vis.t=vis.selected
+            }
+            else
+            {
+                vis.t = new Date();
+            }
+            }
 
 
         console.log("t:"+vis.t)
@@ -294,7 +343,8 @@ class crimeClockVis {
             now.setMinutes(dStr.substr(dStr.indexOf(":")+1));
             now.setSeconds(0);
             return now;
-        }else
+        }
+        else
             return "Invalid Format";
     }
 
