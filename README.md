@@ -57,8 +57,24 @@ stackArea.prototype.updateNum
 stackArea.prototype.updateNone
 ```
 
-
 # crimeCharts.js
+###### crimeCharts.js
+###### In this file we do most of the drawing of charts present in the crimeClockVis.
+###### The initvis method initilises chart parameters like width and height and some important varibales and set ranges for axes
+###### UpdaData() function is used in order to generate data dictionaries for the charts. We do nesting operations to seperate data in the way that is needed for specific charts.It is called from crimeClockVis to initlaise default date and from date slider whenever date is changed.
+###### drawCharts() function is called from crimeClockVis whenever a change in time occurs. It changes the data by sorting w.r.t time for the line chart.
+###### updateVis() function is called from drawCharts() to update visualisations as the data is changed
 
 # crimeClockVis.js
+
+###### The main function of this visualisation is to utilise time functionality to show change in the number of calls throughtout the day. This is a live functionality, therefore, if data was fed for current date it can fetch current time and show the changes live. However since our data is not that big and has gaps for specific time in seconds and minutes. we use hour was a metric. Hovering over the hour circles will show the changes in the line chart. ALternatively time selcter can be used to select a specific time.
+
+###### We also use a date slider that changes line, bubble and bar chart according to the selected date
+
+###### The main purpose of this vis is to show which places are reciving a high call volume and check the call volume during the day as well. It could be used to inform the audiance or send out alerts when a certain count is exceeded as a reuslt of a threatening event or just public saftey in general.
+
+###### crimeClockVis uses initVis() for the placement of hands and initilizing other variables in the vis. wrangleData() makes sure to keep the clock running in real time by uscalling updateVis() and moveHands() in 1 second interval. updateVis() makes sure to check if time is selected. In case of hover events clock stops and shows the data for the selected time. when hover event is done, clock hands move to current time on local device.
+
+
+
 
