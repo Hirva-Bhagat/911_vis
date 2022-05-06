@@ -77,11 +77,22 @@ vis.addbyplaces=d3.nest()
 
 # crimeClockVis.js
 
-###### The main function of this visualisation is to utilise time functionality to show change in the number of calls throughtout the day. This is a live functionality, therefore, if data was fed for current date it can fetch current time and show the changes live. However since our data is not that big and has gaps for specific time in seconds and minutes. we use hour was a metric. Hovering over the hour circles will show the changes in the line chart. ALternatively time selcter can be used to select a specific time.
+###### The main function of this visualisation is to utilise time functionality to show change in the number of calls throughtout the day. This is a live functionality, therefore, if data was fed for current date it can fetch current time and show the changes live. However since our data is not that big and has gaps for specific time in seconds and minutes. we use hour was a metric. Hovering over the hour circles will show the changes in the line chart. ALternatively time selcter can be used to select a specific time. 
 
-###### We also use a date slider that changes line, bubble and bar chart according to the selected date
+###### We also use a date slider that changes line, bubble and bar chart according to the selected date. This uses the dataSlider and crimeCharts functionalities. Here 100 is the default index for date.
+``` 
+vis.myDateSlider = new myDateSlider(vis,'box-3', vis.clockData);
+vis.currentDate=vis.myDateSlider.grouped[100].key
+vis.myCrimeCharts=new myCrimeCharts(vis,vis.myDateSlider.grouped[100].values);
+        
+```
 
-###### The main purpose of this vis is to show which places are reciving a high call volume and check the call volume during the day as well. It could be used to inform the audiance or send out alerts when a certain count is exceeded as a reuslt of a threatening event or just public saftey in general.
+###### In order to implement the click events we use a listener inside our code. once triggered the data is updated in updateVis() by using drawCharts() of crimeCharts.js
+
+```
+vis.myCrimeCharts.drawCharts(vis)
+```
+##### The main purpose of this vis is to show which places are reciving a high call volume and check the call volume during the day as well. It could be used to inform the audiance or send out alerts when a certain count is exceeded as a reuslt of a threatening event or just public saftey in general.
 
 ###### crimeClockVis uses initVis() for the placement of hands and initilizing other variables in the vis. wrangleData() makes sure to keep the clock running in real time by uscalling updateVis() and moveHands() in 1 second interval. updateVis() makes sure to check if time is selected. In case of hover events clock stops and shows the data for the selected time. when hover event is done, clock hands move to current time on local device.
 
